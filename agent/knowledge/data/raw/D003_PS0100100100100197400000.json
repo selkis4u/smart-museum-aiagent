@@ -1,0 +1,131 @@
+{
+  "result": {
+    "totalCount": "1",
+    "resultCode": "0000",
+    "resultMsg": "정상적으로 처리되었습니다.",
+    "list": {
+      "data": {
+        "museumName3": "본관",
+        "purposeName2": "불교",
+        "purposeName1": "종교신앙",
+        "museumName1": "국립1",
+        "purposeName4": "불상",
+        "museumName2": "국립중앙박물관",
+        "purposeName3": "예배",
+        "sizeRangeCode": "PS15006",
+        "relicSubNo": "00000",
+        "museumCode1": "PS01001",
+        "id": "PS0100100100100197400000",
+        "museumCode2": "PS01001001",
+        "materialCode1": "PS08004",
+        "nationalityCode": "PS06001016",
+        "museumCode3": "PS01001001001",
+        "name": "石造毘盧遮那佛坐像, 大日如來像",
+        "museumCode": "PS01001001001",
+        "purposeCode": "PS09008001002001",
+        "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=QTktIS7qEX8ma1MOpXLhdlnwwVENK8v6PT4QvnJYGdY%3D&imageId=SUJhWkhTak1QQS9JRWNKbjRmWFAwRVVXNXF3TkUybGNQaTRFb3ZQTjVJanI1WHVRRDFuRzlSMnNSSS9FZnluNmFUeENUaVhPOWkvK2pXb0FpMk9yWGlOYzhodVRVbHZoMmlXcXE4d0llclU9",
+        "sizeRangeName": "70~100 cm",
+        "purposeCode1": "PS09008",
+        "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=q8udkJ5yO17RY0L326kqI8ZZjl09RuwL%2BK58HYR03Ek%3D&imageId=ajl1dk81VkErdERqRFU4OTlzT2F2ZE51SDJnQy81ZGdVaExXYmphaEc4aVc1eWIxK3V4MHZTUmFrb3U4MEttUlJPYkdBZ2EvaGFMc2xRU29NREVyT2NjU040bUNpMVQz",
+        "purposeCode2": "PS09008001",
+        "purposeCode3": "PS09008001002",
+        "nameCn": "石造毘盧遮那佛坐像, 大日如來像",
+        "purposeCode4": "PS09008001002001",
+        "nationalityCode2": "PS06001016",
+        "nationalityCode1": "PS06001",
+        "sizeInfo": "높이 94cm, 무릎너비 81cm",
+        "relicNo": "1974",
+        "indexWord": "본관1974번, 강원도 원주 전 영전사지 석조비로자나불좌상",
+        "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=J9fHGop%2F5sxcgB1ttLvnSbyX8Mul7BsG5C%2BPtTZxIfw%3D&imageId=UWZnVVBaaFIralV5UEJWR3VQRTlsZ01za2ZURWF1Z2NzUTlMMXFIMU1qcmNQYWNmSkdGUmNodUVTdi93Nyt2Q0xFYVNGTWtEVVZSWW4xZUh1SVllOUVnOUlCRUlzUXY4",
+        "glsv": "1",
+        "materialCode": "PS08004",
+        "nationalityName2": "고려",
+        "nationalityName1": "한국",
+        "materialName1": "석",
+        "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=JGzoukeqAmnAGydSvCsfrqmfzIAQZZlvDbhbb6AEU38%3D&imageId=amRvSXZudkdYYkRINk15bjgxY1hIYlNOOUdKN09SMVNSdWlia0NiQVQ4dC9EdWljQ09vb2Vod2N6L1RzN1FmNzhVVWVFYzlyVENuK3VEdDFTT1I4YVl5UFd1cEdyU3loOG5wMmJ5WTlDM2s9",
+        "nameKr": "석조비로자나불좌상"
+      }
+    },
+    "imageList": {
+      "totalCount": "7",
+      "list": {
+        "data": [
+          {
+            "id": "PS0100100100100197400000",
+            "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=pg8l06ztof0z1rGhUo7X9JpWHB2EQParUgbbHHu5FYs%3D&imageId=QW9hS2NwUnlVcTRMWHl1OXhpQnpwNHI4UmljUmFPN1Z5QTlXaWhHQ0FDeVhEYmV4dUtmaE1SaWpNOFNyY3hydStWSG1FamZmK3ZvS3V1NnFRUmFhNUZ5bVhEZkNsNStzOVZ1RDZjUzM4Wkk9",
+            "imgId": "PS0100100100100197400000",
+            "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=YidMIqNO8Vtl%2BbgzAZOApqklwdzX0bE6acz3%2B%2BlRpCY%3D&imageId=UTlPYmd3TTQyY1ZhVlJWTnplWUFIUzhRWmV0V2czWXllYkNETEJXUzJpUmlCalA3SHNzdXgxZk0xenM5K3hpM2ZpZEZ3bldUOGRGc2NzY3lJZmlKNktvNk9nZ1NXK1Z3",
+            "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=zDJ0Ly%2BBorM%2BD%2BqQ6TizM5vI45PJLh9D7Ek2HJFMU7g%3D&imageId=dHF2WVQ5OWZrdUx6bEZtMUEyaHRkcjZEWERoUStTWjZUQ2o2TmhtMFEweTR6MElWZkhzbHcxTUdSSlNPbWJlSzd5RFl6YTBKYTBBV0tyWDErR0lSdDhVdzQ2V2cvRDlo",
+            "imgOrder": "1",
+            "museumCode": "PS01001001001",
+            "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=FhCdRKe474zBlbZ0VBnpldVkzWfcSvaFt13d2%2B6W2TE%3D&imageId=bGw4d051cTRwMzhkaStxazkyOVh4VDJCbjlGTHdVOGJGejhNUTA2dGlQRDd2TnpjV0YvdldEV3orb3pqZE9ibXRUWFI2WTRwSWRpdUNoeW5CSFZHQm5qcnFFeTdoVHdUVzB4S3htSWxlY2c9"
+          },
+          {
+            "id": "PS0100100100100197400000",
+            "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=kZ3Ub0M8I2DJD4rVydJYmlZ8IE1iRz9bCTAP5t8V01A%3D&imageId=eUNzQjYyemhlNXB4YWZzSmdGeU5CT05tUDdXbG9ET3pKOGxYR3ZrOHV1dVFaaGxNd1Z6T3RWcEJBUUxlbEd2US9jalZvbUhLN05ydkJLbGZRZ3A4dEFOMnJGejVJRHQvRW9KZDNISXBrcVE9",
+            "imgId": "PS0100100100100197400000",
+            "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=1rp7Y6Lm%2FSMYntYN28hfPP3LCfi62J%2BZ6XqYymPc2Ik%3D&imageId=cHdIMFN0N212dFdsUFBvZ2ZQZThmTFppSXFsM3dSMkJhWGZoV1ArMFoyRFlmUEZoZlg1LzZMUFIvSG5JaFJnVXpSaHBvQWNwcDFZQjRPMUcyVWtHRW1hbGU1YUkyb0NE",
+            "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=vwtvjCoENDXP1Tw5g2F%2BllAkQ8rbW3HoaX5Xa%2Ffjnc8%3D&imageId=WFBHOGNFenVGdHNhb2dxcXNOK2hONEpnckdyQzBORWxNcnNid3N0dEhYYjdoQk1WWHU1Mld4d2l4ZmhnckhvYVR1OVlXMStiMDBTUkwvWjB3aU5vdExDSVJ5SURmY2Fo",
+            "imgOrder": "2",
+            "museumCode": "PS01001001001",
+            "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=iSOu7d4Q9ciqxCtEKJMw8OI%2BG1%2BpMOnsbDprHPwFd0Y%3D&imageId=OWh1cktPTFJEUW14Tm05RVk2c25xcDE4RkFYNXJLaXk1TGpmc3R1eWtBekV1QTB5bWM0ZER3QmtLS0dqVjgyVjdCRVhZWXBKTUluSzZRc3FCRlhkMDVhemlsVTU0bVNKOHhXMHFaczl2aE09"
+          },
+          {
+            "id": "PS0100100100100197400000",
+            "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=JX5SOly0GPLFupGb%2FPcR3K8fo72o0N4XpC1GJLh9Q8s%3D&imageId=WHZLS09UUDk1OHBDanZmZTB6UnREa1dRb0hLNk5HOUpjZCtJTkJMWjRGSWdWbEFxbmRwR1BRSk5jM1VNZk1sbG9ULzREQjZCanJ5WWZoeE54emhZazJ3RGl4YVpsSWlT",
+            "imgId": "PS0100100100100197400000",
+            "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=iWXfVXMkfG7VNsinkHC7hwFqM9B2jRGi%2B9%2BUGUXl1pk%3D&imageId=VTFoRlRZelNIczl0c2t4MzhXM0RMZGlSNy8xT2R5RnBNcTZpYWNZVEhsTTYwb0RYcFUzRXdNNmhKM05pV2dKS3BSeW04a1ppby9SSnNVNDc2TDZHTjlVWWhtR3NDYnVM",
+            "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=0FGF02lYC8SxikxjFWJPndaieVrgmRau0FL6vhDeDMA%3D&imageId=MmMxYy9oYlF5bHpSY1AwZkpReW1nRnRnb3JtODI2NGNlSHNOMnk0em5uNnpvYzE4SVhhMGRkdURrL2pvc0NZL3pnNmFtTkZBOCsyWUdUNy8weEdkVWllWGxkcGFveHRQ",
+            "imgOrder": "3",
+            "museumCode": "PS01001001001",
+            "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=bojO1WxKDMoV%2FfKz1bK21HQA0mrlZkKHsuIYfJ7pau4%3D&imageId=ZkQxVnI0aWJmRCtrU0JIOVJIMmZIVEdkZFQ3NmFxVUxJdCtJV2NJVWJCS3JyNSt1akJwRUh5K2pKZVZ1eDI4UW5EdElYNUtWUzR2VFlOUkdIZlNZUVRoN0FHcDBXR3U1"
+          },
+          {
+            "id": "PS0100100100100197400000",
+            "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=0%2FY%2F5mmEUd5fTuS9vngrgZgveilydC0cCYCTEWGwVAs%3D&imageId=aVh0Z0c0TkVlVTRRdUc4ZUVEckRUWEp2WlRSaUdxZlZZM05yNEs2akFlUTdLeWNNYTd6b0dWdFZ3U3FUZUliYlhraElabUZMa2lBb3JmVlpsblhMcURrRDlEejVGUWlN",
+            "imgId": "PS0100100100100197400000",
+            "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=JB1N6rEpiJGBhAaLTKuM2g3Q9JriPAO2KNVD94iacV0%3D&imageId=dlpzOHRsK1hzYUlXM2Y0N2NLRG9PM3AyRWNQY2NjUEJSOU94Wmw4Q2ZIM2N4TTRSTWNYYm52YmJZQjI5YldWY08xMUFsT1YvVVdvOS85dVRqWW40U1ZkOW9SeFo2L1U2",
+            "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=%2BhoJtqyQUF%2By7YLFJvJ77fZGMp0LRdg4ubL5TgonRC0%3D&imageId=YUE5bzRjbSszVUVBMUZJWUVhVi8zckIveHRvVHk5ZFg0eFljbFR6M2ExM0dTU3lQNVpXd01tZWROcG8xTFJvUUttTWZoL3dwRlFpNUcvdmhjMnZZWWd6cXFleGtTdTRt",
+            "imgOrder": "4",
+            "museumCode": "PS01001001001",
+            "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=ddDpXRXmrHaCUFSNmocciQSTeUXwb%2BslXhFPwjsbUtM%3D&imageId=TXFkRXpsdmJiMW5VQTVqZ3B3ZlR6Tm5VKy9oc3doNzNHOGpRcE5PSWtZaU5xQzdLOHVDTmFPemVpMmlGVlgxRmtEbEZtMXZuditRZ2RTSWx1REdLMnBjSXhiblk3WU1s"
+          },
+          {
+            "id": "PS0100100100100197400000",
+            "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=psQcPg1LRS1QATs6rhI0SqzC2LQVSUfFwy1AUNZuy9A%3D&imageId=bUhiaDN1eTQrUktrN09rSUhUeURjTHRlWk9YSXhrNFF5SDl5ejlCa0pPd0xPdWQrVC83OWpEd1Q0REhWWGhCQVlBSVk0K0RndVZVcDVWM1BYQ29IaDdEVEprVG5ROC8w",
+            "imgId": "PS0100100100100197400000",
+            "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=XF1JxaRen1SZhek%2F%2FDW5l9cFtGpdD6p%2F7%2FNETjng5FA%3D&imageId=SS9ORlZNeERjc3VobzdwdkY4ZkhsTngveW9qTXZ4UzI2UWMzSm1uRXJtbDhIcGVxcll3WnZVelZ1aGlMMDFkdEVUVmxYUmZEY3U1VDRVU3k3NXo2clA5bmZQQS9jMWpT",
+            "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=HDKzkBrYNFJwmLGGP85%2FO7o%2B3SPdY4YQWmPvs4XgF0M%3D&imageId=ZkxqQXd0NlBWSWZxSUdCUVJFclR3NjdkQ1pka1FrUDZ4ZnMyTnBPeWlwam1aOVY4UGtwclR6SDdYbnQ5Wmg4VE1td1UvRDZjcDlDUkxqL3FOZzJpSnlZS2VaSWpmRXF3",
+            "imgOrder": "5",
+            "museumCode": "PS01001001001",
+            "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=LrU4pv8pF4UWRcd8oLksjEDwS9mR9HMrhfBasvuWKMI%3D&imageId=NGY1UnRuSFk5RU44Q3ZvMldMQmVpMHNuOUtBajV6L1hndHRmeVlTQ0xIL1EzNEN6SkRPaTBjOW44OU5OOGpQelk5eEFSanYxdlRHWlBWNGRtQ3N0dWFzOWZJUTZDUGFX"
+          },
+          {
+            "id": "PS0100100100100197400000",
+            "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=MlPdDHhjOnopVc6cukJImFfD9eT8rQbvaxZd4M%2Bfqz0%3D&imageId=SDNleHp2RWxLM3ROV09IM21wZnZBWXpVcnh1RUtIWE1rdi9xTFdHVVdORitYQnBXNXp5eXlZbEhsaDFBQ3Y3UmFJVHI0OU9hR0kzeHJzMkV1cFdZOExjWDdpK3cyc2lx",
+            "imgId": "PS0100100100100197400000",
+            "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=Wjuf6vb%2BpcpherIXDdX1NTJLp6dEgcQcEmLZ%2B75uGG8%3D&imageId=V1ZzNVpma1BsR1NJN3FaV0tYNnU5c210MXNiUWpkd21GaHNzcWNnbFA0bG9HcWhOelBRa0pIYzM0RWRoS0hFVDgvUXZBQko2eVpIbXdmL0dITXp6L3RwV3d3S0JBZDhl",
+            "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=fTYWthE36qqxk6LCfimplIYTNZxhkPiG95gTZPJTE64%3D&imageId=dS9NdUZBSzY3RFJwVk9ySXYwNzRLY1ZvQkJFZ0hOSHgzRDF2TFdGK0Z6ajlOZk51aXFEVHlrTGhIb1Rkd0JIMmk3TFpIQm1ITVUzNXYrNTFzSmJ5dURQb2R2d3RENEo2",
+            "imgOrder": "6",
+            "museumCode": "PS01001001001",
+            "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=HHqnLQ%2FgQwRXviou3VNw64lWmUtjov6Dw%2BjaucMwEbk%3D&imageId=SGc1VXdxSDliL1BpNmo0THpwQ0hBckFIaHkxYjl2alAvV1k3ODBLNnFLcEM1RWhLeW8wMHpUYU9sTzVjS0NNU0ZjRVJzZjVtdUh2Q0RmMDZIMXVhZkZPWFg0TDRUakdD"
+          },
+          {
+            "id": "PS0100100100100197400000",
+            "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=%2FIY0zvyxeKJFswc6mrw6UYtpe00eB%2Fy3jIcO7iieiTA%3D&imageId=M0VCZkEzRjJ0Y0tpWWNBc2U4QVhPOHo2ZHMwTGkrT2JUeFFxenFNTTVKQXVEUUlyOE95NzdpaTZXSGR5ZlNZdm12WUZNZzZYTGN5RGZwd0l5L01SdHRYQUQyd3dheEls",
+            "imgId": "PS0100100100100197400000",
+            "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=MoT5xElvDPB16BAyAzl1UW5FTwQ6cEwdSNC400iHO20%3D&imageId=dmN1dklieWxQcHA5N1oza3dCZVdPZ0xNVzVBOXRJV1lKemNiaTZhQ01GblMwdGlMTkNMZkN4MTFxalVNcjYxcEQwN0FNM3hNc3ZOcWZPaEZPTnVlYXJqNTNWZ216MzVK",
+            "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=cdgXL%2BQ8e7ZEBy3Yg8cP3WEdL62zHMnI5Tno6KoGX6I%3D&imageId=ZXpXbXlBd1lVdTRDRERWeVBOV0JhRUxXRnZkMWJRenViSWlhOWZyZFlmMnk5YmdieE90RW5qd3pCUFErTS9ONCtFeWVnSXhHQzZqemxHQ0JRMC9tU29hckJGNTg5YjV4",
+            "imgOrder": "7",
+            "museumCode": "PS01001001001",
+            "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=dZPHDl%2FPHAZpY%2ByBmr23jcxT191T69%2BU7yXkmu3ZoOk%3D&imageId=Uzk2ck9VQlhtcU91QnQvaWFJM3J0SDU4djNGQmpkVXhQUzQyRGxCeTBWVFROSFVGTmx1MStWdkhweVFSNW5Bb243bFFNWVRydHB5eHVvUHUzVjJPYTJUWFFUMjNvS2RN"
+          }
+        ]
+      }
+    },
+    "relationList": {
+      "totalCount": "0",
+      "list": ""
+    }
+  }
+}

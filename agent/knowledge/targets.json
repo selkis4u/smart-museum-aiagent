@@ -1,0 +1,12 @@
+[
+  {"artifact_id": "A001", "emuseum_id": "PS0100100100100966300000", "role": "target", "memo": "금령총 금관, 본관9663"},
+  {"artifact_id": "A002", "emuseum_id": "PS0100100101601041600000", "role": "target", "memo": "지장암 목조비로자나불좌상, 구10416, 보물"},
+  {"artifact_id": "A002", "chunk_prefix": "A002R1", "emuseum_id": "PS0100100101601041700000", "role": "target", "memo": "지장암 비로자나불 조성기, 구10417 (A002 복장물)"},
+  {"artifact_id": "A002", "chunk_prefix": "A002R2", "emuseum_id": "PS0100100101601042200000", "role": "target", "memo": "지장암 비로자나불 복장 다라니, 구10422 (A002 복장물)"},
+  {"artifact_id": "A002", "chunk_prefix": "A002R3", "emuseum_id": "PS0100100101601042300000", "role": "target", "memo": "지장암 비로자나불 복장 후령통 및 관계 물목, 구10423 (A002 복장물)"},
+  {"artifact_id": "D001", "emuseum_id": "PS0100100100100943500000", "role": "distractor", "memo": "금관총 금관, 본관9435"},
+  {"artifact_id": "D002", "emuseum_id": "PS0100100100101431900000", "role": "distractor", "memo": "서봉총 금관, 본관14319"},
+  {"artifact_id": "D003", "emuseum_id": "PS0100100100100197400000", "role": "distractor", "memo": "석조비로자나불좌상(고려), 본관1974"},
+  {"artifact_id": "D004", "emuseum_id": "PS0100100100100197500000", "role": "distractor", "memo": "석조비로자나불좌상(고려), 본관1975"},
+  {"artifact_id": "D005", "emuseum_id": "PS0100100100500274600000", "role": "distractor", "memo": "석조비로자나불좌상(통일신라), 덕수2746 - 이전 A002"}
+]

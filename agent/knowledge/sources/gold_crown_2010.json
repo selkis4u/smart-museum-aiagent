@@ -1,0 +1,27 @@
+{
+  "source_id": "GC2010",
+  "file": "docs/신라의_황금문화와_금관_2010.pdf",
+  "title": "신라의 황금문화와 금관",
+  "author": "이한상(대전대학교 역사문화학과 교수)",
+  "org": "국립중앙박물관 교육팀 은하문화학교 강의 자료",
+  "date": "2010-09-29",
+  "license": "이용조건 표시 없음 - 수업 시연용 RAG 근거로만 사용, 대체 해설 원고에는 쓰지 않음",
+  "caution": "2010년 자료. '금관 5점' 등 이후 바뀐 내용과 수치(금령총 금관 지름 16.5cm vs 박물관 17.0cm)는 현재 박물관 정보를 우선한다.",
+  "body_font": [10.5, 11.5],
+  "note_font": [8.8, 9.4],
+  "stop_heading": "참고문헌",
+  "common_ids": ["A001", "D001", "D002"],
+  "units": {
+    "1":   {"artifact_ids": "common", "memo": "머리말"},
+    "2":   {"artifact_ids": "common", "memo": "황금의 지하궁전, 신라고분"},
+    "3":   {"artifact_ids": "common", "memo": "외형적 특징 개요·형태 변화(금령총 언급 포함)"},
+    "3-①": {"artifact_ids": [], "memo": "황남대총 북분 금관 - 수집 대상 밖, 혼동용"},
+    "3-②": {"artifact_ids": ["D001"], "memo": "금관총 금관"},
+    "3-③": {"artifact_ids": ["D002"], "memo": "서봉총 금관"},
+    "3-④": {"artifact_ids": ["A001"], "memo": "금령총 금관"},
+    "3-⑤": {"artifact_ids": [], "memo": "천마총 금관 - 수집 대상 밖, 혼동용"},
+    "4":   {"artifact_ids": "common", "memo": "신라금관의 기원"},
+    "5":   {"artifact_ids": "common", "memo": "신라금관에 표현된 상징성"},
+    "6":   {"artifact_ids": "common", "memo": "맺음말"}
+  }
+}

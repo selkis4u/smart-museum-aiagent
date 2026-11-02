@@ -1,0 +1,69 @@
+{
+  "result": {
+    "totalCount": "1",
+    "resultCode": "0000",
+    "resultMsg": "정상적으로 처리되었습니다.",
+    "list": {
+      "data": {
+        "museumName3": "구",
+        "purposeName2": "불교",
+        "materialName2": "은",
+        "purposeName1": "종교신앙",
+        "museumName1": "국립1",
+        "purposeName4": "불상",
+        "museumName2": "국립중앙박물관",
+        "purposeName3": "예배",
+        "relicSubNo": "00000",
+        "museumCode1": "PS01001",
+        "id": "PS0100100101601042300000",
+        "museumCode2": "PS01001001",
+        "materialCode1": "PS08001",
+        "materialCode2": "PS08001002",
+        "nationalityCode": "PS06001018",
+        "museumCode3": "PS01001001016",
+        "name": "地藏庵 毗盧遮那佛 腹臟物",
+        "museumCode": "PS01001001016",
+        "purposeCode": "PS09008001002001",
+        "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=hJzoqrR%2FmChGYDjntHt3Rslsct2d2D8T%2BHX1LqIx5TY%3D&imageId=YjNCTC8vY3ZtTlJBQ0tMTFFPWUFBQjUxODB4RDBTMnNaZ3hlTmhoaitqWXorc28wcUFGTitnTmVuK0wwM2d3c0thMHg2dEd3UENqVldYa3Z4UGo4a3VxSnpMTU56YllMcVJUYTMzZWluQTA9",
+        "purposeCode1": "PS09008",
+        "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=%2B3%2BXGwUQxHgsjR3UzF%2FSKKbBxbXqneuBtc5J8AAf6MU%3D&imageId=Ymd3ZmQvNW5Mc1V2YmRMYUxtNjZXdWo0dmtmeE1qTE93eGtkY2pPYVZBdUZmekRwaGQ2dDFrZ3dyTnk4SlVIKzNpR3VPVVVuUksyVm9ERzFxRFBzbGdFRE8zNVMyK3lh",
+        "purposeCode2": "PS09008001",
+        "purposeCode3": "PS09008001002",
+        "nameCn": "地藏庵 毗盧遮那佛 腹臟物",
+        "purposeCode4": "PS09008001002001",
+        "nationalityCode2": "PS06001018",
+        "nationalityCode1": "PS06001",
+        "sizeInfo": "높이 12cm, 지름 4.4cm",
+        "relicNo": "10423",
+        "indexWord": "후령통, 지장암, 비로자나불, 복장물",
+        "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=8%2F4CIKzF64O4hHfakbnEL9G73QlLG8y%2BNZ2v7TnX2g0%3D&imageId=b2Nremh0cmF3QnZEZDJQeVYwZ2RMM1lHQ0VqazdFeGpsTy9mZWZzQ3pvN1oxYjZaMWFHaHhHQzJ1bzBwNTBIam8zMHY0eGdIcXZHeEc0RHlEVVFuT1FaajZEc1pzemFP",
+        "glsv": "1",
+        "materialCode": "PS08001002",
+        "nationalityName2": "조선",
+        "nationalityName1": "한국",
+        "materialName1": "금속",
+        "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=9jx%2BNCotlhFY%2BVxst8zRYhfMReV9Nvs5n83MxDlCCfA%3D&imageId=VmViOXl4TXVIaXcwUzc4YlE0ZVY2Mk5FaXlPKzQ1dkJCT3dQTU9IRitwTzJlaW9zeC9rV0FpeFVKa0pOZzdnMzhhSmhWc0xDRzNUaGlLcmQ0R2RRaHpDbmhnWUc5Y1I1Y1hwUUhRNFNvY3c9",
+        "nameKr": "지장암 비로자나불 복장 후령통 및 관계 물목"
+      }
+    },
+    "imageList": {
+      "totalCount": "1",
+      "list": {
+        "data": {
+          "id": "PS0100100101601042300000",
+          "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=bKhpyfJDQ2kfeltFenil47%2FYIgA5HR1FwOQNjS346Ks%3D&imageId=bnIzdTltT3pVTzR1NHM0eTBKeW5mOGx6dXpDTzhZbTRQbVF1d3dxUkVNalZ4TEtReEp0ZDZnL2tSek1lemJFZUV5RzJibTFybnh3NWZzS2VwOGdVMVRQU0JnZXpTZkdjM1RZY3lNK1VveE09",
+          "imgId": "PS0100100101601042300000",
+          "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=P%2FRF7wgzkbyrr98guPtadlExz0OHeORcrinLhVKOAWU%3D&imageId=c3Nsa3JwWllEWnJVQmlXZHZYK2p4OEJ5RU83NnNQQUY1RHZ3cmR2aHpuSFhiQkQveDFWNm1ZT256a1lQLzFmVVU2NmdFdlNPeDNMTWRSSWpEVmZNUVVyVW1neU1SaXRG",
+          "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=zr6GaczjSPlP6A5G7OOhZTZshVDRzdnFq2QMlCnuq3s%3D&imageId=RXVCMkR3eGJCa05vSnpzYjFkSXNWZkN2MTBvVE8rclJGd0dpa0RGa3B6OSs1bzVDUjdsbitYeWlnREhEVDMwWTlFSEY2NG81czVsS2JBOFNzTVNQUGJlQUlRK255YWNq",
+          "imgOrder": "1",
+          "museumCode": "PS01001001016",
+          "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=FTFMqRiEa3FmdpXknqkb8gICmxHrgiWRTlpx38V0rlA%3D&imageId=eTBGeWJLUU9WT1daWWk3Nm5KbE1iRUNxSTRUdE5adHFxLzJrS2oyU0hrdTFYL3RYOEdlU0JZSjg4emNPMFRJZU1ORGZsVXRJOWRBa0wwd05VMnEzUE8zMlhoTTlFTjlYcGNxQ2EyN2IvVW89"
+        }
+      }
+    },
+    "relationList": {
+      "totalCount": "0",
+      "list": ""
+    }
+  }
+}
