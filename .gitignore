@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# 환경 변수·API 키 (절대 커밋 금지)
+.env
+*.env
+
+# 모델 가중치·데이터셋·녹화 영상 (용량이 커서 별도 공유)
+*.pt
+*.pth
+*.onnx
+data/
+datasets/
+recordings/
+*.mp4
+*.avi
+
+# 벡터 DB·로그
+chroma_db/
+*.db
+*.sqlite3
+logs/
+
+# IDE·OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Office 임시 잠금 파일 (Word·Excel·PowerPoint가 열려 있을 때 생성)
+~$*
