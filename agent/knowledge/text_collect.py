@@ -20,6 +20,7 @@ from pathlib import Path
 from emuseum_collect import ROOT, TARGETS_FILE, merge_chunks, write_jsonl
 
 TEXT_CHUNK_MAX = 350
+TEXT_CHUNK_MIN = 80  # 끝에 남은 조각이 이보다 짧으면 앞 청크에 붙인다
 
 
 def target_ids() -> set:
@@ -41,7 +42,10 @@ def split_verbatim(text: str, max_len: int = TEXT_CHUNK_MAX) -> list[str]:
         else:
             buf = f"{buf} {s}" if buf else s
     if buf:
-        chunks.append(buf)
+        if chunks and len(buf) < TEXT_CHUNK_MIN:
+            chunks[-1] = f"{chunks[-1]} {buf}"  # 원문에서도 공백 하나로 이어진 자리라 글자는 그대로
+        else:
+            chunks.append(buf)
     return chunks
 
 

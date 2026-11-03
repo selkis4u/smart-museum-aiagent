@@ -27,6 +27,7 @@ python pdf_collect.py sources/gold_crown_2010.json    # PDF 청크 생성(docs/ 
 python pdf_collect.py sources/bulgoksa_2011.json
 python text_collect.py sources/curator_a003.json  # 웹 글(큐레이터 추천) 청크 생성(docs/ 에 원문 필요)
 python text_collect.py sources/curator_a004.json
+python text_collect.py sources/curator_a002.json
 ```
 
 각 명령은 끝날 때 `data/chunks_*.jsonl`을 모아 `data/chunks.jsonl`을 다시 만든다.
@@ -38,8 +39,10 @@ python text_collect.py sources/curator_a004.json
 - `docs/` 원본 PDF·웹 글 텍스트 — 저작권 때문에 Git에 올리지 않는다(.gitignore). 팀 공유 드라이브에서 받아 넣을 것
   - `curator_A003_1569299.txt`: 국립중앙박물관 큐레이터 추천 「백자 상감 연꽃 넝쿨무늬 대접」(권소현), 공공누리 제3유형(출처표시+변경금지). 원문을 고치지 않고 청크로만 쓰고, 해설에는 문장을 그대로 옮기지 않는다
   - `curator_A004_16862.txt`: 국립중앙박물관 큐레이터 추천 「천흥사 종」(채해정), 공공누리 제3유형(출처표시+변경금지). 높이 187cm는 e뮤지엄 174.2cm와 달라 e뮤지엄 값을 쓴다
+  - `curator_A002_2351278.txt`: 국립중앙박물관 큐레이터 추천 「목조비로자나여래좌상 - 왕비의 부름으로 집결한 승려 장인들이 함께 만든 불상」(유수란), 공공누리 제3유형(출처표시+변경금지). 왕비 이름 표기가 e뮤지엄('장열')과 다름('장렬'). 해설은 e뮤지엄 표기를 따른다
 - `data/` 청크와 API 원본 응답(Git에 올림)
-- `fallback/` 대체 해설 원고(문장별 음성 파일로 만들 원고)
+- `fallback/` 대체 해설 원고(문장별 음성 파일로 만들 원고). A001·A002, A003·A004
+- `eval/` 검색 평가 질의(NFR-17) 20건과 설명
 
 ## 청크 형식
 

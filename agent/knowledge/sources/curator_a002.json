@@ -1,0 +1,27 @@
+{
+  "source_id": "CUR003",
+  "file": "docs/curator_A002_2351278.txt",
+  "title": "목조비로자나여래좌상 - 왕비의 부름으로 집결한 승려 장인들이 함께 만든 불상 (큐레이터 추천)",
+  "author": "유수란(국립중앙박물관)",
+  "org": "국립중앙박물관",
+  "url": "https://www.museum.go.kr/MUSEUM/contents/M0501000000.do?schM=view&relicRecommendId=2351278",
+  "license": "공공누리 제3유형(출처표시+변경금지) - 교육용 프로젝트 내부 사용, 원문을 고치지 않고 청크로만 사용",
+  "caution": "해설을 만들 때 원문 문장을 그대로 옮기지 말고 사실만 가져와 새 문장으로 쓴다. 왕비 이름은 이 글이 '장렬왕후', e뮤지엄이 '장열왕후'로 다르며 해설에는 e뮤지엄 표기 '장열왕후'를 쓴다. 선찰사·칠보사 불상은 A002가 아니다.",
+  "first_section": "도입",
+  "headings": ["승려 장인은 누구인가", "왕비의 부름을 받은 승려 장인", "발원문 속 조각승 명단", "잊힌 이름들, 승려 장인을 기억하며"],
+  "paragraphs": [
+    {"starts": "현진(玄眞) 등 17명, <목조비로자나여래좌상>", "kind": "meta", "artifact_ids": ["A002"], "memo": "사진 설명(만든 사람·연도·높이)"},
+    {"starts": "위엄을 갖추고 경건하게 기도하는 듯한", "kind": "desc", "artifact_ids": ["A002"], "memo": "장렬왕후 발원, 17명 승려 장인, 11구 중 하나"},
+    {"starts": "17명의 승려 장인이 만들었다는 말은", "kind": "background", "artifact_ids": ["A002"], "memo": "승려 장인의 뜻"},
+    {"starts": "우리나라에서는 삼국시대부터 조선시대까지", "kind": "background", "artifact_ids": ["A002"], "memo": "승려 장인의 역사"},
+    {"starts": "이 불상 안에서 조각을 성물로", "kind": "desc", "artifact_ids": ["A002"], "memo": "복장물과 발원문 발견"},
+    {"starts": "<목조비로자나여래좌상 조성 발원문>과 복장물", "kind": "meta", "artifact_ids": ["A002"], "memo": "발원문·복장물 사진 설명"},
+    {"starts": "“이제 우리 장렬왕후께서는", "kind": "note", "artifact_ids": ["A002"], "memo": "발원문 인용"},
+    {"starts": "자수사와 인수사는 궐 밖에", "kind": "desc", "artifact_ids": ["A002"], "memo": "왕실 여인 수행처, 장렬왕후 폐위, 현존 3구"},
+    {"starts": "발원문에는 조각승 현진, 응원", "kind": "desc", "artifact_ids": ["A002"], "memo": "조각승·야장 명단, 화원 호칭"},
+    {"starts": "조각승 명단을 잘 살펴보면", "kind": "desc", "artifact_ids": ["A002"], "memo": "여러 조각승 집단의 공동 작업"},
+    {"starts": "서로 다른 집단에서 활동하던 조각승들이", "kind": "note", "artifact_ids": ["A002"], "memo": "벽암 각성의 감독 - 비하인드"},
+    {"starts": "2021년 12월, 국립중앙박물관에서는", "kind": "note", "artifact_ids": ["A002"], "memo": "특별전 '조선의 승려 장인'"},
+    {"starts": "이제 사찰이나 전시장에서 스쳐 지나가던", "kind": "background", "artifact_ids": ["A002"], "memo": "조선 후기 조각승·화승 수"}
+  ]
+}
