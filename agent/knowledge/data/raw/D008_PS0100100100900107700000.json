@@ -1,0 +1,83 @@
+{
+  "result": {
+    "totalCount": "1",
+    "resultCode": "0000",
+    "resultMsg": "정상적으로 처리되었습니다.",
+    "list": {
+      "data": {
+        "museumName3": "동원",
+        "purposeName2": "음식기",
+        "materialName2": "청자",
+        "purposeName1": "식",
+        "museumName1": "국립1",
+        "purposeName4": "대접",
+        "museumName2": "국립중앙박물관",
+        "purposeName3": "음식",
+        "sizeRangeCode": "PS15003",
+        "relicSubNo": "00000",
+        "museumCode1": "PS01001",
+        "id": "PS0100100100900107700000",
+        "museumCode2": "PS01001001",
+        "materialCode1": "PS08003",
+        "materialCode2": "PS08003001",
+        "nationalityCode": "PS06001018",
+        "museumCode3": "PS01001001009",
+        "name": "靑磁象嵌蓮唐草文大楪, 청자 상감 연당초문 대접",
+        "museumCode": "PS01001001009",
+        "purposeCode": "PS09002001001009",
+        "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=2XITgXH%2FUzsut40c%2BUzLFS5HMgjk4Z4q42DdoNQhlIY%3D&imageId=OE1xUkxrNVkzRjRvYWFTbGgzYng3aC9XVmJ3cDJDb0k2ckdMOUNmUHIxcXFZOU5QZmpPRnkvSWhQOEh3ckx4MWRzZEhaaFMzWmdMcEJmdlJIRnhQS3NwZkhuOUFHd1IzVHFBK0JQVVRSUDA9",
+        "sizeRangeName": "10~30 cm",
+        "purposeCode1": "PS09002",
+        "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=NpCpMnuMiS0uJJzqmVAFLLPiBcV%2FnPVEaJiNhlRuI30%3D&imageId=dExzZUZhaXh2M2piSElBS3NUd0lxa1B5Q3ZPRzhnaFViVUE2SlNGajkxME83UG1PYjR6bDVlKzJXNkVpOEU5NFNUWkJDNVhHRmgwS2UxRVY0ZSswOEVtSmtyT3VReE9F",
+        "purposeCode2": "PS09002001",
+        "purposeCode3": "PS09002001001",
+        "purposeCode4": "PS09002001001009",
+        "nameCn": "靑磁象嵌蓮唐草文大楪, 청자 상감 연당초문 대접",
+        "nationalityCode2": "PS06001018",
+        "nationalityCode1": "PS06001",
+        "sizeInfo": "높이 8.3cm, 입지름 17.5cm",
+        "relicNo": "1077",
+        "indexWord": "동원1077번, 연꽃, 넝쿨, 음식기, 동원 이홍근 기증",
+        "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=RJOtM5PpAg0QC%2BvPc4X7af2IK%2BYiE7qYx9h0itfJTNA%3D&imageId=Y1FSWmgwb3hudE1QV2JHRjJTc0ZRd3hWSFliQXFoTGxIeDhwSjU0bCszMmxuYVhaM3h0Y1JManpkem5XdnFPdGhXbVc5dzFOUFNFSE5qam1tQk15RjhnUDZXZ0FYbzRF",
+        "glsv": "1",
+        "materialCode": "PS08003001",
+        "nationalityName2": "조선",
+        "nationalityName1": "한국",
+        "materialName1": "도자기",
+        "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=sUUTRvPQJbSvKqGFZIH4jsSf6lB%2F36ikKzaDTvnpCrU%3D&imageId=UEV0Z0NoUURCcldSRnVoNFQ2NjVhZlpIUUNBaXFIMTZYUDJzTlpiNWhOTzdqbnNFazJ5bU5EaE1pYUJrdzNiZGZEK09ERVc3dnBqNXBZVlUrSXorRjJHV3A4MEozTGx2QkZmWkdTS1ExelE9",
+        "nameKr": "청자 상감 연꽃 넝쿨무늬 대접"
+      }
+    },
+    "imageList": {
+      "totalCount": "2",
+      "list": {
+        "data": [
+          {
+            "id": "PS0100100100900107700000",
+            "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=8ziG%2BC%2BOUfSWkxrDCqkEm3xi6iefO8q%2BB13HEGXu78c%3D&imageId=YTQ3Nlc1MnZvTnZZN0xQb3ZMRUFWbXFaenAxcXFLTzRlbERJWk5RTXpMUW9sa0wrOW4yVEtuSysvTVpsalNZcWxMVDN2bGk0Y0hKSjlGcmVuVXlBT0I0VFpTTzJncCtBa3FYUytBdGIvWU09",
+            "imgId": "PS0100100100900107700000",
+            "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=RsSQ6gKS8L8Va5jduWX9nJNcJXgAwrt613c%2FLCdbg2Y%3D&imageId=K1RvczlUdXVNcUJsa2UxOHptaUJsWXQvcFk5N0pzTVZhRkNYWjZyTm5sa1IzQXB1ZkR6cnFRYjNlanVSVnNwTko3aEhTTWthejNrY3dHVVdpVE45SElYUWtDTk9zc2NB",
+            "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=neiTb0bbKSMvF1QHm7%2B3UbWam6P76pYf3wDJTlgtK4g%3D&imageId=WmIrSXZVSzczOU1jNHVvb3I1T0c0Mmh5Y1B2b3VkZ2Iyei84ZkNTYVFkc1Iyb29UeUhIRVpYTW9TeXJqU2oyMyt2RCsrcXdFbm9ROHdsMkJKRW04OVRyeVhkbUlXV2dV",
+            "imgOrder": "1",
+            "museumCode": "PS01001001009",
+            "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=6QGaMsHW0%2F%2BKilBOjjg%2B2di7IavywudNWI7IXj0hbxI%3D&imageId=WGhSejBMRm1tVjJydEJqWFlUUjdhYlU5czNuanhWV3RrbWVSSklaS3ZkQmsyM3I3RnFQWjY0eFF4amNrT1o0QlBRMkhPa0Y2RGRXbDAvOGJtSEdtMW1qMm5KZFB1NUczV2J4andtNGc4SEk9"
+          },
+          {
+            "id": "PS0100100100900107700000",
+            "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=4zUvNbakkkZF%2BCyPZArMQRSV7MwbqTXnJCGw2%2FD9NuU%3D&imageId=UHpoN3lYeDIzSndUQVlMSVBiTnRIN3hsT3BNd0NKWjAvTExDeDh3NzVFNzE4WTRHOWxiZTJKaDRlOFRMb2s1b0JoeTkvTGZTT29RdE9CcDBCdUhSdnY1RG5oNWlZNG5BVmVucXFEekV4MDg9",
+            "imgId": "PS0100100100900107700000",
+            "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=m2xkmibEwdR9vo6fy3DHgFus6SOzbyIF1jGI%2Bisl8Ic%3D&imageId=bmVPcitmL2lDdjlMUE90QXNpYWtrNlNTcTFZUnUwV3ZsRzNnTWRGdUs0Nm95ckJvSW52NnZXczB2Wjh3U2xNc0t5M3hoaDJ6cDFvbGc1SHlsMVJoUkRMN0laZEluaWxO",
+            "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=W9DNqoi2KL5FwGffXZRi65%2BTUB%2FaZjpYJLxNLVWQ02E%3D&imageId=MFVhaWRKdXVyWGdmWDBZcDdiVlJzNnE1TG5GOWRmeUsvY25CU0dpaTkzSjBaSmdreWhPR1lyejFqVm5xZHlFbnlGOXVIeDl5SGZCYnRPdDM0UTNyczZHYjRJTFZmbDJC",
+            "imgOrder": "2",
+            "museumCode": "PS01001001009",
+            "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=nKTLpC6ffFvN%2FdJQEyDMtsloO73MaJNB3j%2BbQI3MORE%3D&imageId=M1BlK2N0cHlzc1pPei9lR2VYNVkrRlBGcWpEclYyZVFzeDBYNWdOUWpVbWc5QkFZdWI1NkRPMS9zTEMwZDRXRExqb1B6ZzR5VUh6QitkWTRRMEdiamt3T3EreUErNTdvbUw3UE1kUzJrR2M9"
+          }
+        ]
+      }
+    },
+    "relationList": {
+      "totalCount": "0",
+      "list": ""
+    }
+  }
+}

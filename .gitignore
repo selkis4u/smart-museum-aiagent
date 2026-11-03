@@ -39,3 +39,5 @@ Thumbs.db
 # - 원본 PDF는 저작권(학술논문·이용조건 미표시 자료) 때문에 커밋하지 않고 각자 보관
 !agent/knowledge/data/
 agent/knowledge/docs/
+# e뮤지엄 API 마지막 응답 디버그용 덤프(매 실행마다 바뀜)
+agent/knowledge/data/raw/last_response.txt

@@ -8,5 +8,13 @@
   {"artifact_id": "D002", "emuseum_id": "PS0100100100101431900000", "role": "distractor", "memo": "서봉총 금관, 본관14319"},
   {"artifact_id": "D003", "emuseum_id": "PS0100100100100197400000", "role": "distractor", "memo": "석조비로자나불좌상(고려), 본관1974"},
   {"artifact_id": "D004", "emuseum_id": "PS0100100100100197500000", "role": "distractor", "memo": "석조비로자나불좌상(고려), 본관1975"},
-  {"artifact_id": "D005", "emuseum_id": "PS0100100100500274600000", "role": "distractor", "memo": "석조비로자나불좌상(통일신라), 덕수2746 - 이전 A002"}
+  {"artifact_id": "D005", "emuseum_id": "PS0100100100500274600000", "role": "distractor", "memo": "석조비로자나불좌상(통일신라), 덕수2746 - 이전 A002"},
+  {"artifact_id": "A003", "emuseum_id": "PS0100100100900088700000", "role": "target", "memo": "백자 상감 연꽃 넝쿨무늬 대접, 국보, 동원887 (쇼케이스 교체용)"},
+  {"artifact_id": "D006", "emuseum_id": "PS0100100100900009500000", "role": "distractor", "memo": "백자 상감 연꽃 넝쿨무늬 대접, 동원95 (A003과 이름이 같은 다른 대접)"},
+  {"artifact_id": "D007", "emuseum_id": "PS0100100100900091100000", "role": "distractor", "memo": "분청사기 상감 연꽃 넝쿨무늬 대접, 동원911"},
+  {"artifact_id": "D008", "emuseum_id": "PS0100100100900107700000", "role": "distractor", "memo": "청자 상감 연꽃 넝쿨무늬 대접, 동원1077"},
+  {"artifact_id": "A004", "emuseum_id": "PS0100100100500244500000", "role": "target", "memo": "「천흥사」가 새겨진 천흥사 동종, 국보, 덕수2445, 고려 1010년 (오픈 유물 교체용)"},
+  {"artifact_id": "D009", "emuseum_id": "PS0100100101100175500000", "role": "distractor", "memo": "「청녕 사년」명 동종, 신수1755 (A004처럼 연도가 새겨진 고려 종)"},
+  {"artifact_id": "D010", "emuseum_id": "PS0100100100900458700000", "role": "distractor", "memo": "「천안광덕사」가 새겨진 동종, 동원4587 (같은 천안 지명)"},
+  {"artifact_id": "D011", "emuseum_id": "PS0100100100100112700000", "role": "distractor", "memo": "聖居山天興寺鍾銘(開城), 본관1127 (같은 천흥사 이름, 종이 아닌 명문 자료로 보임)"}
 ]

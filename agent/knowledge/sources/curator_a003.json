@@ -1,0 +1,26 @@
+{
+  "source_id": "CUR001",
+  "file": "docs/curator_A003_1569299.txt",
+  "title": "백자 상감 연꽃 넝쿨무늬 대접 (큐레이터 추천)",
+  "author": "권소현(국립중앙박물관)",
+  "org": "국립중앙박물관",
+  "url": "https://www.museum.go.kr/MUSEUM/contents/M0501000000.do?schM=view&relicRecommendId=1569299",
+  "license": "공공누리 제3유형(출처표시+변경금지) - 교육용 프로젝트 내부 사용, 원문을 고치지 않고 청크로만 사용",
+  "caution": "해설을 만들 때 원문 문장을 그대로 옮기지 말고 사실만 가져와 새 문장으로 쓴다. 다른 상감백자 대접 이야기는 A003의 사실로 말하지 않는다.",
+  "first_section": "도입",
+  "headings": ["조선 상감백자의 백미", "전통과 외래의 조화"],
+  "paragraphs": [
+    {"starts": "백자 상감 연꽃 넝쿨무늬 대접, 조선 15세기", "kind": "meta", "artifact_ids": ["A003"], "memo": "기본 정보(1981년 이홍근 기증)"},
+    {"starts": "상앗빛을 띠는 이 백자 대접은", "kind": "desc", "artifact_ids": ["A003"]},
+    {"starts": "이 대접은 중국 원(元)", "kind": "desc", "artifact_ids": ["A003"]},
+    {"starts": "청자의 시대였던 고려를 지나", "kind": "background", "artifact_ids": ["A003"], "memo": "조선 백자 일반"},
+    {"starts": "이 연꽃 넝쿨무늬 대접이 만들어진 조선 초기에는", "kind": "background", "artifact_ids": ["A003"]},
+    {"starts": "중국 청화백자는 고려 말에", "kind": "note", "artifact_ids": ["A003"], "memo": "세종 대 청화백자 전래 기록 - 비하인드"},
+    {"starts": "대접 바깥 면에 마치 세필", "kind": "desc", "artifact_ids": ["A003"]},
+    {"starts": "이처럼 단정한 도자기 형태에", "kind": "desc", "artifact_ids": ["A003"]},
+    {"starts": "다만 차이가 있다면 중국 청화백자는", "kind": "desc", "artifact_ids": ["A003"]},
+    {"starts": "다른 상감백자 대접에서도", "kind": "desc", "artifact_ids": [], "memo": "다른 대접(건희1791·동원95) 이야기, 어느 대접인지 특정되지 않아 연결하지 않음 - 혼동용"},
+    {"starts": "한편, 대접의 안쪽 면에는", "kind": "desc", "artifact_ids": ["A003"]},
+    {"starts": "이처럼 백자 상감 연꽃 넝쿨무늬 대접에 표현된", "kind": "desc", "artifact_ids": ["A003"]}
+  ]
+}

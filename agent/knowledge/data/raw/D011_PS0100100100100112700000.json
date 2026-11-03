@@ -1,0 +1,67 @@
+{
+  "result": {
+    "totalCount": "1",
+    "resultCode": "0000",
+    "resultMsg": "정상적으로 처리되었습니다.",
+    "list": {
+      "data": {
+        "museumName3": "본관",
+        "purposeName2": "서화",
+        "materialName2": "동합금",
+        "purposeName1": "문화예술",
+        "museumName1": "국립1",
+        "purposeName4": "동종",
+        "museumName2": "국립중앙박물관",
+        "purposeName3": "탁본",
+        "relicSubNo": "00000",
+        "museumCode1": "PS01001",
+        "id": "PS0100100100100112700000",
+        "museumCode2": "PS01001001",
+        "materialCode1": "PS08001",
+        "materialCode2": "PS08001004",
+        "nationalityCode": "PS06001020",
+        "museumCode3": "PS01001001001",
+        "name": "聖居山天興寺鍾銘(開城)",
+        "museumCode": "PS01001001001",
+        "purposeCode": "PS09009003003004",
+        "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=XRj%2FCoUYRsuGNy1irQ2Xq13YC09U1ySyjD6U%2FFX5vEg%3D&imageId=MGViOXVPSVN0T2J1WVVtUjZUMDlQV1dWNURoblRsd0kvTWxLWENFbS8xcWltVGxWNXVIT05MelB3TmprSm5UUw%3D%3D",
+        "purposeCode1": "PS09009",
+        "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=LZN05R2eoLhgiqSZCuWLhE5SZhNaVadOozdPaUSGOcs%3D&imageId=ZUJBYUdVS2lTUEdSSDJnSVJBMmtqY3pZaVdidlp3aXovYXYrUWRBNWZhQmNxZTM5QmsrSFQ4N0NRVHZEL1VJZg%3D%3D",
+        "purposeCode2": "PS09009003",
+        "purposeCode3": "PS09009003003",
+        "purposeCode4": "PS09009003003004",
+        "nationalityCode2": "PS06001020",
+        "nationalityCode1": "PS06001",
+        "relicNo": "1127",
+        "indexWord": "본관1127번",
+        "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=Qx1r%2BCJxwcWHuPndzfEJD49sUauko3VIV2%2BJiNgM2q8%3D&imageId=b2xrQ0o3cGFPcXJaMmZrMEFXWEc5SXJ5S0NldHlEb2hXOEpBRWVQMzV0NGJYQmVEcGJUM1B3PT0%3D",
+        "glsv": "1",
+        "materialCode": "PS08001004",
+        "nationalityName2": "일제강점",
+        "nationalityName1": "한국",
+        "materialName1": "금속",
+        "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=HuuqDCNhVOeIrhwIiwPdaYav4wi2qkosBrLg1lMlvkY%3D&imageId=K01VdFdFRFVRMzNtL2FnQ2NtSlhKVWVJVVk1Q2FsVFZ5RC8zcmUyd0NqbjZZQm1aRjBVWjBobXJSWm9GaHNBMw%3D%3D",
+        "nameKr": "聖居山天興寺鍾銘(開城)"
+      }
+    },
+    "imageList": {
+      "totalCount": "1",
+      "list": {
+        "data": {
+          "id": "PS0100100100100112700000",
+          "imgThumUriM": "http://www.emuseum.go.kr/openapi/img?serviceKey=jkYGjlbisx9oTB5Ktc1o1M3a4kMI7Sj%2FAtyJflQEws0%3D&imageId=OURIV09DZitubmtUVFZPM3RNWXZ1QUwwS0U3UDFuY1gxWERCUUtYNHEyWlNsTDJKR3Fld2NiTnNMRnhERjNDcg%3D%3D",
+          "imgId": "PS0100100100100112700000",
+          "imgUri": "http://www.emuseum.go.kr/openapi/img?serviceKey=WVfCsr1YmAuGcSTYF4DG06J3XKacq9Lp2dJt4jOKSvE%3D&imageId=OU1xZVo5bjEyT0pJY0NEd2l2ajVjdUZ2bHArWGczcnYwdzRlOWx3T3ZXUWl1eFExYUEwbjRBPT0%3D",
+          "imgThumUriS": "http://www.emuseum.go.kr/openapi/img?serviceKey=CxduvF3SgZi%2B5nCgMydGzriivAZKgXn3REnLRiimSa8%3D&imageId=Vm1TaDdwM2ZxWFovb2MrbEtwSTZsUW4wdWJObVRnZW1kQ0dldjZtR0dIbFoxNHRISEpBT1c5Z2wzWW9HZ1J1Rw%3D%3D",
+          "imgOrder": "1",
+          "museumCode": "PS01001001001",
+          "imgThumUriL": "http://www.emuseum.go.kr/openapi/img?serviceKey=t7XCRLJ7sL6C3G1CMOxb9ZksRouQ45NxDF%2BZsHi9g2o%3D&imageId=UnFMTFQwbkVHeS9YbjYyc1Y4WEhSZFMxRUIwRlZFNU5oM0dyM1BBY2d6dlJmTSsyRFpWT2phZ09OS29hOGgvUA%3D%3D"
+        }
+      }
+    },
+    "relationList": {
+      "totalCount": "0",
+      "list": ""
+    }
+  }
+}

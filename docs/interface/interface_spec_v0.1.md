@@ -25,7 +25,8 @@
 
 | ID | 형식 | 만드는 곳 |
 |---|---|---|
-| `artifact_id` | `A001` (혼동 테스트용 유사 유물은 `D001`, Web 등록 대상 아님) | Web 유물 등록 |
+| `artifact_id` | `A001` (혼동 테스트용 유사 유물 `D001`~`D005`는 Agent 지식 자료에만 있고 Web 등록·이벤트에는 나오지 않음) | Web 유물 등록 |
+| `chunk_id` | e뮤지엄 자료 `A001-03`·`A002R1-03`(부속 소장품 접두어), PDF 자료 `GC2010-012` | Agent 지식 자료(`agent/knowledge/`) |
 | `zone_id` | `Z01` | CV 설정 도구 |
 | `visitor_id` | 정수 (트래커 ID) | CV |
 | `event_id` | `evt-20261120-140321123-0001` (시각 + 일련번호, 재시작해도 겹치지 않음) | CV |
@@ -142,6 +143,12 @@
 - `text`는 Flask가 edge-tts로 변환, `audio_file`은 미리 만든 파일(대체 해설·공통 연결 멘트)을 그대로 재생. 둘 중 하나만 보낸다.
 - 연결 멘트는 `kind:"BRIDGE"`, `sentence_no`는 재개할 문장 번호와 같게 보내고 해설 문장보다 먼저 재생한다.
 - `interrupted`가 다른 구역 문장이면 Flask가 멘트 뒤에 그 문장을 처음부터 다시 재생하므로 Agent는 무시한다. 같은 구역이면 그 `sentence_no`를 재개 위치로 저장한다.
+- 돌려주는 문장 번호(우선 재생의 `interrupted.sentence_no`, 정지의 `interrupted_sentence_no`) 규칙:
+  1. 재생 중이던 문장이 있으면 그 문장 번호
+  2. 문장과 문장 사이라 재생 중인 문장이 없으면, 대기열에 남아 있던 아직 재생하지 않은 첫 문장 번호
+  3. 재생 중인 문장도 대기열도 없을 때만 null
+- Agent는 null을 받으면 앞서 저장한 재개 위치를 그대로 둔다(덮어쓰지 않음). 예: 주의로 이미 멈춘 상태에서 5초가 지나 경고로 올라가 우선 재생을 다시 부르면 끊을 해설이 없어 null이 온다.
+- 응답 시점: Flask는 해설을 끊고 대기열을 비운 뒤 멘트 재생을 시작한 직후 응답한다. 멘트 재생이 끝날 때까지 기다리지 않는다(Agent의 조명·기록 호출이 늦어지지 않도록, NFR-02 1초).
 - 정지는 그 구역 대기열만 비운다(반복 주의·세션 종료·스피커 대기 중 이탈).
 - 미리 만든 음성 파일 위치: `audio/ments/CAUTION.mp3`, `audio/ments/WARNING.mp3`, `audio/ments/NOTICE_PROHIBITED_ITEM.mp3`, `audio/ments/BRIDGE_COMMON.mp3`, 대체 해설 `audio/fallback/A001/01.mp3`. `audio_file`에는 `audio/` 아래 상대 경로를 보낸다.
 
@@ -168,7 +175,7 @@
 {"session_id":"ses-Z01-20261120-140300000","zone_id":"Z01","artifact_id":"A001",
  "started_at":"...","ended_at":"...","end_reason":"LEFT_AFTER_COMPLETE",
  "start_count":2,"script_end_count":2,"completed_count":2,
- "script":"지금 보고 계신 유물은 ...","rag_chunk_ids":["A001-desc-03","A001-note-01"],
+ "script":"지금 보고 계신 유물은 ...","rag_chunk_ids":["A001-03","GC2010-012"],
  "source_urls":["https://www.yna.co.kr/..."],"fallback_used":false}
 ```
 
