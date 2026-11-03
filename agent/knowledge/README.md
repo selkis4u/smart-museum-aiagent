@@ -42,4 +42,4 @@ python pdf_collect.py sources/bulgoksa_2011.json
 
 - `kind`: `meta` 기본 정보 · `desc` 설명 · `note` 각주 비하인드 · `background` 시대 배경(그 유물의 사실로 말하지 않음)
 - 검색은 관람 판정 이벤트의 artifact_id로 `artifact_ids`를 먼저 거른 뒤 BM25·벡터 검색
-- 규칙의 근거는 `docs/requirements/결정사항.md` 참고
+- 규칙의 근거는 `docs/requirements/decisions.md` 참고
