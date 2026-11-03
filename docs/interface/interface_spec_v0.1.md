@@ -14,7 +14,7 @@
 - CV → Flask를 Socket.IO로 추천하는 이유: Flask가 브라우저용으로 Flask-SocketIO를 이미 쓰므로 받은 좌표를 같은 서버에서 바로 브라우저로 넘길 수 있고, 연결을 유지해 초당 5회 전송에 요청마다 드는 비용이 없다. 단점은 CV가 Agent용 WebSocket 라이브러리와 별도로 python-socketio 클라이언트를 써야 하고, 서버와 클라이언트의 Socket.IO 버전을 맞춰야 한다는 것. 대안 HTTP POST 초당 5회는 가장 단순하고 curl·Postman으로 바로 시험할 수 있으며 부하도 문제없다. 연결 끊김 판정은 두 방식 모두 "3초 미수신"(FR-WEB-16)으로 같다. 지연 목표(NFR-04 0.5초)는 둘 다 충분히 맞출 수 있어 담당자가 편한 쪽으로 정해도 된다.
 - **[11/3 결정] 재연결 주체**: Agent가 서버이므로 연결이 끊기면 클라이언트인 **CV가 5초 간격으로** 다시 연결한다(FR-WEB-16·결정사항 문구 정정). CV → Flask Socket.IO도 CV가 자동 재연결한다.
 - **[11/3 결정] 실행 환경**: CV·Agent·Flask 세 모듈을 시연 노트북 한 대에서 실행한다. 주소는 모두 `127.0.0.1`, 포트는 Agent 8765·Flask 5000이며 `config/settings.yaml`에서 바꾼다. 시각은 한 PC의 시계를 쓰므로 시간 동기화는 필요 없다.
-- **Agent 재접속 동기화**: CV 연결이 (다시) 맺어지거나 Agent가 재시작되면 Agent는 바로 `GET /api/zones/status`를 한 번 불러 구역별 현재 위험 단계를 맞춘다. CV는 끊긴 동안의 이벤트를 쌓아 두지 않는다(지난 이벤트는 의미가 없음).
+- **Agent 재접속 동기화**: CV 연결이 (다시) 맺어지거나 Agent가 재시작되면 Agent는 바로 `GET /api/zones/status`를 한 번 불러 구역별 현재 위험 단계를 맞춘다. **[11/3 결정]** 재시작 직후 구역이 이미 `CAUTION`·`WARNING`이면 동기화 시각을 시작 시각으로 새 침범 기록을 연다(4.4, `cause`는 null). 재시작 전에 열려 있던 기록은 "종료 미확인"으로 남는다. CV는 끊긴 동안의 이벤트를 쌓아 두지 않는다(지난 이벤트는 의미가 없음).
 
 ## 1. 공통 규칙
 
@@ -61,7 +61,7 @@
 | `artifact_id` | string | |
 | `prev_level` / `level` | string | LEVEL_CHANGE가 아니면 둘 다 그 구역의 현재 단계 |
 | `cause` | string \| null | LEVEL_CHANGE일 때만 |
-| `visitor_ids` | int[] | LEVEL_CHANGE: 침범한 관람객, VIEWING_START: 판정 시점 구역 관람객, PROHIBITED_ITEM: 소지자 1명, ZONE_EMPTY: `[]` |
+| `visitor_ids` | int[] | LEVEL_CHANGE: 침범한 관람객(CLEARED는 그 침범 동안 한 번이라도 침범한 관람객 전원 **[11/3 결정]**), VIEWING_START: 판정 시점 구역 관람객, PROHIBITED_ITEM: 소지자 1명, ZONE_EMPTY: `[]` |
 | `item_type` | string \| null | PROHIBITED_ITEM일 때만 |
 | `timestamp` | string | 판정 시각(프레임 시각) |
 
@@ -76,7 +76,8 @@
  "timestamp":"2026-11-20T14:04:00.050+09:00"}
 ```
 
-- CAUTION_TIMEOUT(주의 5초 지속 → 경고)도 LEVEL_CHANGE로 보낸다. 단계가 같은 채로 원인만 바뀌는 경우(이미 경고인데 TOUCH)는 보내지 않는다.
+- CAUTION_TIMEOUT(주의 5초 지속 → 경고)도 LEVEL_CHANGE로 보낸다. 단계가 같은 채로 원인만 바뀌거나(이미 경고인데 TOUCH) 침범자만 늘어나는 경우는 보내지 않는다. 늘어난 침범자는 CLEARED의 `visitor_ids`로 전달된다.
+- **[11/3 결정]** 판정 세부: VIEWING_START는 구역이 빈 뒤 다음 ZONE_EMPTY까지 한 번만 보내고, 판정 전에 단계가 NORMAL이 아니게 되면 머문 시간을 0으로 되돌려 해제 후 다시 2초를 센다. 침범자의 트래킹 ID가 끊기면 트래커가 ID를 유지하는 동안(track_buffer)은 침범 중으로 보고, 버려지면 침범자에서 빼고 해제를 판정한다. PROHIBITED_ITEM은 같은 관람객이 같은 구역을 나간 뒤 30초 안에 다시 들어오면 보내지 않는다.
 
 ## 3. CV → Flask 좌표 메시지 (초당 5회)
 
@@ -159,16 +160,19 @@
 {"event_id":"evt-20261120-140321123-0001","zone_id":"Z01","artifact_id":"A001",
  "level":"CAUTION","cause":"LINE_1","visitor_ids":[3],
  "started_at":"2026-11-20T14:03:21.123+09:00",
- "session_id":"ses-Z01-20261120-140300000","repeated_caution":false}
+ "session_id":"ses-Z01-20261120-140300000","session_paused":true,"repeated_caution":false}
 ```
 응답 `{"ok":true,"record_id":128}`
+
+- **[11/3 결정]** `session_id`는 침범 당시 그 구역의 세션(없으면 null), `session_paused`는 그 침범으로 세션이 일시정지됐는지(해설·스피커 대기 중이면 true, 완료 대기 중이면 false, 세션 없으면 false).
+- Agent 재시작 동기화로 여는 기록은 `event_id`에 `sync-Z01-20261120-140321123`처럼 구역과 동기화 시각을 넣고, `cause`는 null, `started_at`은 동기화 시각.
 
 **갱신·닫기** `PATCH /api/records/intrusions/128`
 ```json
 {"event_id":"evt-...-0003","max_level":"WARNING","cause":"CAUTION_TIMEOUT","visitor_ids":[3,5]}
-{"event_id":"evt-...-0004","ended_at":"2026-11-20T14:03:31.900+09:00"}
+{"event_id":"evt-...-0004","ended_at":"2026-11-20T14:03:31.900+09:00","visitor_ids":[3,5,8]}
 ```
-`ended_at`이 오면 닫히고 지속 시간을 계산한다. 닫히지 않은 기록은 화면에 "종료 미확인".
+`ended_at`이 오면 닫히고 지속 시간을 계산한다. 닫을 때 `visitor_ids`는 CLEARED 이벤트의 침범자 전원으로 바꾼다. 닫히지 않은 기록은 화면에 "종료 미확인".
 
 **세션 기록** `POST /api/records/sessions` (세션이 끝날 때 한 번)
 ```json
