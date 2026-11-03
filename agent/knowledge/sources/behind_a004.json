@@ -1,0 +1,30 @@
+{
+  "source_id": "NOTE001",
+  "file": "notes/behind_A004.txt",
+  "title": "천흥사 동종 비하인드 정리",
+  "author": "3조",
+  "org": "3조 작성 요약",
+  "license": "팀 작성 요약(원문 문장 미인용, 사실만 정리). 문단별 출처는 source.url",
+  "caution": "공개 자료에서 사실만 뽑아 팀이 새로 쓴 문단이다. 이름·연도·수치는 e뮤지엄을 따른다.",
+  "headings": ["천흥사 동종 비하인드 정리 (3조 작성)"],
+  "first_section": "천흥사 동종 비하인드 정리 (3조 작성)",
+  "paragraphs": [
+    {"starts": "종 몸체의 위패 모양 틀 안에는", "kind": "note", "artifact_ids": ["A004"],
+     "org": "한국학중앙연구원", "title": "한국민족문화대백과사전 「성거산 천흥사명 동종」", "url": "https://encykorea.aks.ac.kr/Article/E0029167"},
+    {"starts": "『동국여지승람』에 따르면 성거산이라는", "kind": "note", "artifact_ids": ["A004"],
+     "org": "한국학중앙연구원", "title": "한국민족문화대백과사전 「성거산 천흥사명 동종」", "url": "https://encykorea.aks.ac.kr/Article/E0029167",
+     "caution": "성거산 이름 유래와 천흥사 창건 연도는 '전한다'로만 말한다."},
+    {"starts": "천흥사가 문을 닫은 뒤 종은 남한산성으로", "kind": "note", "artifact_ids": ["A004"],
+     "org": "뉴시스", "title": "국보 '천흥사 동종' 출토지 천안 아닌 광주로 표기 논란 (2017-10-30)", "url": "https://www.newsis.com/view/NISX20171030_0000132431",
+     "caution": "폐사 연도 1510년과 인조 때 이전은 천안시 설명이므로 '천안시 설명에 따르면'으로 말한다. 남한산성 종 사용은 이진향 외(2010, 한국전통조경학회지 28권 4호)에도 나온다."},
+    {"starts": "한 연구에 따르면 이 종은 1909년 11월", "kind": "note", "artifact_ids": ["A004"],
+     "org": "쿠키뉴스", "title": "[조한필의 視線] '천안국보' 제자리찾기 운동을 펴자 (2025-01-01)", "url": "https://www.kukinews.com/article/view/kuk202501010085",
+     "caution": "사진 기록·이왕가박물관 이전은 칼럼이 인용한 강호선 논문(한국중세사연구 81호, 2025) 내용이다. 구입 경위 의혹은 해설에서 단정하거나 강조하지 않는다."},
+    {"starts": "박물관은 이왕가박물관이 경기도 광주에서", "kind": "note", "artifact_ids": ["A004"],
+     "org": "뉴시스", "title": "국보 '천흥사 동종' 출토지 천안 아닌 광주로 표기 논란 (2017-10-30)", "url": "https://www.newsis.com/view/NISX20171030_0000132431",
+     "caution": "출토지는 견해가 갈리므로 해설에서 어느 한쪽으로 단정하지 않는다."},
+    {"starts": "천안 성거읍 천흥리의 천흥사 터에는", "kind": "note", "artifact_ids": ["A004"],
+     "org": "쿠키뉴스", "title": "[조한필의 視線] 천안 천흥사, 사적 되려면 왕건은 일단 떼놓자 (2025-08-17)", "url": "https://www.kukinews.com/article/view/kuk202508170048",
+     "caution": "석탑·당간지주의 현종 때 조성은 '보는 견해가 많다'로만 말한다."}
+  ]
+}

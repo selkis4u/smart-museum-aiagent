@@ -16,5 +16,5 @@
 {"qid": "Q16", "artifact_id": "A004", "type": "conflict", "query": "천흥사 동종의 높이는 얼마인가요?", "expected": ["A004-01"], "distractors": [], "note": "정답 174.2cm(e뮤지엄). 큐레이터 글 CUR002-003은 187cm - 해설은 e뮤지엄 값을 써야 함"}
 {"qid": "Q17", "artifact_id": "A004", "type": "fact", "query": "천흥사 종은 언제 만들어졌고 어떻게 알 수 있나요?", "expected": ["A004-04", "CUR002-005"], "distractors": ["D009-02"], "note": "정답 1010년, 위패 모양 안의 명문. 청녕 4년명 종(D009)도 연도가 새겨진 고려 종"}
 {"qid": "Q18", "artifact_id": "A004", "type": "confusion", "query": "천흥사 종의 용뉴는 어떤 모양인가요?", "expected": ["A004-02", "CUR002-004"], "distractors": ["D009-03"], "note": "정답 여의주를 물고 고개를 든 용. D009 용뉴 설명과 용어가 겹침"}
-{"qid": "Q19", "artifact_id": "A004", "type": "fact", "query": "범종은 어떤 중생을 구하기 위한 의식구인가요?", "expected": ["CUR002-001"], "distractors": [], "note": "정답 땅속(지옥)의 중생. 사물 중 범종"}
+{"qid": "Q19", "artifact_id": "A004", "type": "behind", "query": "천흥사 종은 박물관에 오기 전 어디에서 쓰였나요?", "expected": ["NOTE001-003", "NOTE001-004"], "distractors": [], "note": "정답 남한산성(성문 여닫는 시각·위급을 알리는 종). 질문에 '남한산성'을 넣지 않아 비하인드(note) 검색을 시험. 이전 Q19(범종이 구하는 중생, CUR002-001)를 2026-11-03 교체"}
 {"qid": "Q20", "artifact_id": "A004", "type": "confusion", "query": "천흥사 종의 몸체에는 어떤 장식이 있나요?", "expected": ["A004-03", "CUR002-004"], "distractors": ["D009-04"], "note": "정답 당좌와 비천상을 번갈아 배치(당좌 2개). D009는 당좌 4개"}

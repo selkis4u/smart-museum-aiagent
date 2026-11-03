@@ -9,6 +9,7 @@
      headings에 적은 줄은 소제목으로 보고 이후 문단의 section으로 쓴다.
      설정에 없는 줄(사진 설명·사진 저작권 표시 등)은 버리고 목록을 출력한다.
   3) 문단이 길면 문장 경계에서 나누되 글자는 고치지 않는다(공공누리 3유형 변경금지).
+     문단 설정에 org·title·url 등을 적으면 그 문단만 출처를 바꾼다(여러 자료를 정리한 요약 노트용).
   4) data/chunks_<source_id>.jsonl에 저장하고 data/chunks.jsonl(전체)을 다시 합친다.
 """
 
@@ -73,6 +74,7 @@ def build(cfg_path: Path):
         role = "target" if targets & set(ids) else "distractor"
         source = {k: cfg[k] for k in ("org", "title", "author", "url", "license", "caution") if k in cfg}
         source["section"] = section
+        source.update({k: rule[k] for k in ("org", "title", "author", "url", "license", "caution") if k in rule})  # 문단별 출처
         for piece in split_verbatim(ln):
             rows.append({"chunk_id": f"{cfg['source_id']}-{len(rows) + 1:03d}", "artifact_ids": ids,
                          "role": role, "kind": rule.get("kind", "desc"), "text": piece, "source": source})

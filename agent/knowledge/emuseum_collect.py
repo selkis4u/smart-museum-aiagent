@@ -36,6 +36,7 @@ RAW_DIR = ROOT / "data" / "raw"
 CHUNK_FILE = ROOT / "data" / "chunks.jsonl"            # 모든 출처를 합친 최종 파일
 EMUSEUM_CHUNK_FILE = ROOT / "data" / "chunks_emuseum.jsonl"
 TARGETS_FILE = ROOT / "targets.json"
+CORRECTIONS_FILE = ROOT / "corrections.json"         # e뮤지엄 기준값과 다른 청크의 주의 문구
 
 CHUNK_MIN, CHUNK_MAX = 80, 220  # 문장 단위로 묶는 길이(자). 해설문 하나가 2~4청크가 되도록
 
@@ -311,6 +312,25 @@ def write_jsonl(path: Path, rows: list[dict]):
     path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8", newline="\n")
 
 
+def apply_corrections(rows: list[dict]):
+    """corrections.json의 주의 문구를 해당 청크의 caution 필드로 붙인다(원문 text는 고치지 않음)."""
+    if not CORRECTIONS_FILE.exists():
+        return
+    rules = json.loads(CORRECTIONS_FILE.read_text(encoding="utf-8")).get("rules", [])
+    by_id = {r["chunk_id"]: r for r in rows}
+    for r in rows:
+        r.pop("caution", None)
+    n = 0
+    for rule in rules:
+        for cid in rule["chunk_ids"]:
+            if cid not in by_id:
+                print(f"  [주의] corrections.json의 {cid}가 청크에 없습니다. chunk_id가 바뀌었는지 확인하세요.")
+                continue
+            by_id[cid].setdefault("caution", []).append(rule["caution"])
+            n += 1
+    print(f"  주의 문구: {n}건")
+
+
 def merge_chunks():
     """data/chunks_*.jsonl(출처별 청크)을 모아 data/chunks.jsonl 하나로 만든다."""
     rows = []
@@ -322,6 +342,7 @@ def merge_chunks():
     dup = {i for i in ids if ids.count(i) > 1}
     if dup:
         sys.exit(f"chunk_id 중복: {sorted(dup)[:5]}")
+    apply_corrections(rows)
     write_jsonl(CHUNK_FILE, rows)
     print(f"최종: {CHUNK_FILE} ({len(rows)}개)")
 

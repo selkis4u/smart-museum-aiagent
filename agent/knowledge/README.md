@@ -30,18 +30,21 @@ python pdf_collect.py sources/bulgoksa_2011.json
 python text_collect.py sources/curator_a003.json  # 웹 글(큐레이터 추천) 청크 생성(docs/ 에 원문 필요)
 python text_collect.py sources/curator_a004.json
 python text_collect.py sources/curator_a002.json
+python text_collect.py sources/behind_a004.json  # 팀 작성 비하인드 요약(notes/)
 ```
 
 각 명령은 끝날 때 `data/chunks_*.jsonl`을 모아 `data/chunks.jsonl`을 다시 만든다.
 
 ## 폴더
 
+- `corrections.json` e뮤지엄 기준값과 다른 청크의 주의 문구. 합칠 때 청크의 `caution` 필드로 붙는다(원문은 고치지 않음)
 - `targets.json` 수집 대상. id 대신 `"relic": "구10416", "search": "지장암"`을 적으면 build가 id를 찾아 채운다
 - `sources/` PDF·웹 글별 설정: 제목 규칙, 글자 크기, 장·절(또는 문단)과 artifact_ids 연결
 - `docs/` 원본 PDF·웹 글 텍스트 — 저작권 때문에 Git에 올리지 않는다(.gitignore). 팀 공유 드라이브에서 받아 넣을 것
   - `curator_A003_1569299.txt`: 국립중앙박물관 큐레이터 추천 「백자 상감 연꽃 넝쿨무늬 대접」(권소현), 공공누리 제3유형(출처표시+변경금지). 원문을 고치지 않고 청크로만 쓰고, 해설에는 문장을 그대로 옮기지 않는다
   - `curator_A004_16862.txt`: 국립중앙박물관 큐레이터 추천 「천흥사 종」(채해정), 공공누리 제3유형(출처표시+변경금지). 높이 187cm는 e뮤지엄 174.2cm와 달라 e뮤지엄 값을 쓴다
   - `curator_A002_2351278.txt`: 국립중앙박물관 큐레이터 추천 「목조비로자나여래좌상 - 왕비의 부름으로 집결한 승려 장인들이 함께 만든 불상」(유수란), 공공누리 제3유형(출처표시+변경금지). 왕비 이름 표기가 e뮤지엄('장열')과 다름('장렬'). 해설은 e뮤지엄 표기를 따른다
+- `notes/` 공개 자료에서 사실만 뽑아 팀이 새로 쓴 요약 문단(원문 미인용이라 Git에 올림). `behind_A004.txt`: 천흥사 동종 명문·성거산 유래·남한산성 종·이왕가박물관 이전·출토지 견해·천흥사 터 유적. 문단별 출처 URL은 `sources/behind_a004.json`
 - `data/` 청크와 API 원본 응답(Git에 올림)
 - `fallback/` 대체 해설 원고(문장별 음성 파일로 만들 원고). A001·A002, A003·A004
 - `eval/` 검색 평가 질의(NFR-17) 20건과 설명
@@ -54,5 +57,6 @@ python text_collect.py sources/curator_a002.json
 ```
 
 - `kind`: `meta` 기본 정보 · `desc` 설명 · `note` 각주 비하인드 · `background` 시대 배경(그 유물의 사실로 말하지 않음)
+- `caution`(있을 때만): 원문 값이 e뮤지엄 기준과 다를 때의 주의 문구 목록. 해설 생성 시 근거 청크와 함께 LLM에 넘겨 기준값을 따르게 한다. chunk_id가 바뀌면 `corrections.json`도 고친다
 - 검색은 관람 판정 이벤트의 artifact_id로 `artifact_ids`를 먼저 거른 뒤 BM25·벡터 검색
 - 규칙의 근거는 `docs/requirements/decisions.md` 참고
