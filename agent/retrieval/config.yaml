@@ -1,0 +1,69 @@
+# 지식 검색(FR-AG-02·03) 설정. 코드 수정 없이 값을 바꾼다(NFR-13).
+# 경로는 이 파일이 있는 폴더(agent/retrieval) 기준.
+
+chunks: ../knowledge/data/chunks.jsonl
+eval_queries: ../knowledge/eval/retrieval_queries.jsonl
+chroma_dir: chroma_db          # .gitignore의 chroma_db/ 로 저장소에 올라가지 않음
+
+embedding:
+  backend: openai              # openai | hash(테스트용: API 없이 동작, 정확도 의미 없음)
+  model: text-embedding-3-small
+  batch_size: 64
+
+bm25:
+  # kiwi 형태소 분석 후 남길 품사(앞글자 비교). N 명사, VV 동사, VA 형용사, XR 어근, SL 영어, SN 숫자, SH 한자
+  keep_tags: [N, VV, VA, XR, SL, SN, SH]
+  # 형태소 분석기가 잘못 자르는 유물 용어('금관에는'→'금/관', '종의'→'종의')를 사전에 추가
+  user_words: [금관, 금령총, 금관총, 서봉총, 종, 동종, 범종, 용뉴, 음통, 당좌, 비천상, 곱은옥, 곡옥, 사슴뿔,
+               세움장식, 녹각, 달개, 비로자나불, 복장물, 후령통, 조성기, 다라니, 조각승, 장열왕후, 청화백자, 넝쿨무늬]
+  # 질의에만 붙여 넣는 같은 뜻 단어(질의 표현과 도록 표현이 다를 때). 벡터 검색에는 쓰지 않음
+  # 키는 품사와 관계없이 질의의 모든 형태소에서 찾는다('언제'는 부사, '만드는'의 '만들'은 보조용언으로 잘려도 확장됨)
+  synonyms:
+    곡옥: [곱은옥]
+    곱은옥: [곡옥]
+    종: [동종, 범종]
+    만들: [조성, 제작]
+    크기: [높이, 지름, 입지름]
+    언제: [세기, 시기, 연대]
+    나오: [출토, 발견]
+    다르: [차이]
+    붙이: [연결, 접합, 부착]
+    사슴뿔: [녹각]
+    가지: [분지, 곁가지]
+
+hybrid:
+  vector_top: 20               # 벡터 검색 후보 수
+  bm25_top: 20                 # BM25 후보 수
+  rrf_k: 60                    # Reciprocal Rank Fusion 상수
+
+reranker:
+  enabled: true
+  model: BAAI/bge-reranker-v2-m3   # sentence-transformers CrossEncoder로 로컬 실행
+  candidates: 10               # 재순위화할 상위 후보 수(배경 제한 적용 후). 20 → 10: CPU 시간 절반
+  max_length: 320              # 질의+청크 토큰 상한. 청크가 대부분 400자 이하라 320이면 잘림이 거의 없음
+  torch_threads: 2             # CPU 전용 노트북에서 CV와 코어를 나눠 쓰도록 제한
+
+# 결과(와 재순위화 후보)에 넣을 kind=background(시대 배경) 청크 최대 수. 빼면 제한 없음
+background_max: 1
+
+top_k: 3                       # 해설 생성에 넘길 근거 수(NFR-17은 상위 3개 기준)
+
+# 근거 캐시(evidence_cache.py): Agent 시작 때 유물별 해설 질의의 검색 결과를 미리 계산해 둔다.
+# Re-ranking(CPU 질의당 약 9초)이 첫 문장 준비 5초 안에 들어오지 않아서. 원고가 아니라 근거 청크만 저장하고,
+# 도슨트 스크립트는 관람 판정 때 이 근거와 최신 소식으로 실시간 생성한다.
+# 아래 값이나 청크·검색 설정이 바뀌면 다음 시작 때 자동으로 다시 만든다(유물 4점 × 주제 5개 약 3분).
+evidence_cache:
+  path: cache/evidence_cache.json   # .gitignore 대상(만든 결과물)
+  per_topic: 8                 # 주제마다 저장할 근거 수. Re-ranking 후보가 10개라 늘려도 빌드 시간은 같음(A001처럼 고유 청크가 적은 유물도 모두 담기게)
+  evidence_limit: 8            # evidence()가 해설 생성에 넘길 근거 수(주제별 순위를 번갈아 합치고 배경은 background_max개까지)
+  artifacts:                   # 전시·교체용 유물(유물 ID: 질의에 넣을 이름, e뮤지엄 표기 기준)
+    A001: 금령총 금관
+    A002: 지장암 목조비로자나불좌상
+    A003: 백자 상감 연꽃 넝쿨무늬 대접
+    A004: 천흥사 동종
+  topics:                      # 해설 구성(① 도입 ② 도록 핵심 설명)에 맞춘 질의. 이름 뒤 조사를 피하려고 쉼표로 이음
+    intro: "{name}, 어느 시대의 어떤 유물인가요?"
+    making: "{name}, 언제 어떻게 만들어졌나요?"
+    features: "{name}, 생김새와 장식·무늬의 특징은 무엇인가요?"
+    history: "{name}, 어디에서 나왔고 어떻게 전해졌나요?"
+    behind: "{name}, 만든 사람이나 얽힌 이야기가 있나요?"

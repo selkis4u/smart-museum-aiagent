@@ -1,0 +1,8 @@
+openai
+chromadb
+rank_bm25
+kiwipiepy
+pyyaml
+python-dotenv
+# Re-ranker(config.yaml reranker.enabled: true)일 때만 필요. torch(CPU)를 함께 설치함
+sentence-transformers

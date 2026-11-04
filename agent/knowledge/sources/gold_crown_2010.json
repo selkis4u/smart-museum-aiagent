@@ -12,16 +12,16 @@
   "stop_heading": "참고문헌",
   "common_ids": ["A001", "D001", "D002"],
   "units": {
-    "1":   {"artifact_ids": "common", "memo": "머리말"},
-    "2":   {"artifact_ids": "common", "memo": "황금의 지하궁전, 신라고분"},
-    "3":   {"artifact_ids": "common", "memo": "외형적 특징 개요·형태 변화(금령총 언급 포함)"},
+    "1":   {"artifact_ids": "common", "kind": "background", "memo": "머리말"},
+    "2":   {"artifact_ids": "common", "kind": "background", "exclude_if_contains": ["서전(瑞典)"], "memo": "황금의 지하궁전, 신라고분 (서봉총 이름 유래 각주는 혼동용)"},
+    "3":   {"artifact_ids": "common", "kind": "background", "memo": "외형적 특징 개요·형태 변화(금령총 언급 포함)"},
     "3-①": {"artifact_ids": [], "memo": "황남대총 북분 금관 - 수집 대상 밖, 혼동용"},
     "3-②": {"artifact_ids": ["D001"], "memo": "금관총 금관"},
     "3-③": {"artifact_ids": ["D002"], "memo": "서봉총 금관"},
     "3-④": {"artifact_ids": ["A001"], "memo": "금령총 금관"},
     "3-⑤": {"artifact_ids": [], "memo": "천마총 금관 - 수집 대상 밖, 혼동용"},
-    "4":   {"artifact_ids": "common", "memo": "신라금관의 기원"},
-    "5":   {"artifact_ids": "common", "memo": "신라금관에 표현된 상징성"},
-    "6":   {"artifact_ids": "common", "memo": "맺음말"}
+    "4":   {"artifact_ids": "common", "kind": "background", "memo": "신라금관의 기원"},
+    "5":   {"artifact_ids": "common", "kind": "background", "exclude_if_contains": ["서봉총 금관은"], "memo": "신라금관에 표현된 상징성 (서봉총 금관 새 장식 문단은 혼동용)"},
+    "6":   {"artifact_ids": "common", "kind": "background", "memo": "맺음말"}
   }
 }

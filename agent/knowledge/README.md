@@ -58,5 +58,6 @@ python text_collect.py sources/behind_a004.json  # 팀 작성 비하인드 요�
 
 - `kind`: `meta` 기본 정보 · `desc` 설명 · `note` 각주 비하인드 · `background` 시대 배경(그 유물의 사실로 말하지 않음)
 - `caution`(있을 때만): 원문 값이 e뮤지엄 기준과 다를 때의 주의 문구 목록. 해설 생성 시 근거 청크와 함께 LLM에 넘겨 기준값을 따르게 한다. chunk_id가 바뀌면 `corrections.json`도 고친다
+- 여러 금관에 공통인 강의 자료(GC2010)의 공통 장(1~6장)은 `background`로 둔다. 신라 금관 일반 이야기라 A001의 사실로 말하지 않는다. 그 안에서 서봉총 고유 내용(이름 유래 각주, 금관 꼭대기 새 장식 문단)은 `exclude_if_contains`로 연결을 끊어 혼동용으로 돌린다
 - 검색은 관람 판정 이벤트의 artifact_id로 `artifact_ids`를 먼저 거른 뒤 BM25·벡터 검색
 - 규칙의 근거는 `docs/requirements/decisions.md` 참고

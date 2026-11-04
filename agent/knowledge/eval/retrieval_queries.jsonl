@@ -1,6 +1,6 @@
 {"qid": "Q01", "artifact_id": "A001", "type": "confusion", "query": "금령총 금관의 출자형 장식은 몇 단인가요?", "expected": ["A001-03"], "distractors": ["D002-02"], "note": "정답 4단. 서봉총 금관(D002)은 3단이라 필터를 끄면 섞일 수 있음"}
 {"qid": "Q02", "artifact_id": "A001", "type": "fact", "query": "금령총 금관에는 곡옥이 달려 있나요?", "expected": ["A001-03", "A001-04"], "distractors": ["D001-03"], "note": "정답 곡옥 없음(금 영락만). 금관총 금관(D001)은 곡옥 있음"}
-{"qid": "Q03", "artifact_id": "A001", "type": "fact", "query": "금관의 사슴뿔 모양 장식 가지는 어떻게 붙였나요?", "expected": ["A001-04"], "distractors": [], "note": "정답 따로 만들어 못으로 연결. 질문에 녹각형 대신 쉬운 말을 써 의미 검색을 시험"}
+{"qid": "Q03", "artifact_id": "A001", "type": "fact", "query": "금관의 사슴뿔 모양 장식 가지는 어떻게 붙였나요?", "expected": ["A001-04", "GC2010-027"], "distractors": [], "note": "정답 따로 만들어 못으로 연결. 질문에 녹각형 대신 쉬운 말을 써 의미 검색을 시험"}
 {"qid": "Q04", "artifact_id": "A001", "type": "fact", "query": "금령총에서 금관과 함께 나온 유물에는 무엇이 있나요?", "expected": ["A001-05"], "distractors": ["D002-05"], "note": "정답 금방울 등. 서봉총 함께 출토 유물(D002-05)과 구분"}
 {"qid": "Q05", "artifact_id": "A001", "type": "conflict", "query": "금령총 금관의 크기는 얼마인가요?", "expected": ["A001-01"], "distractors": [], "note": "정답 전체높이 49.2cm·높이 27.0cm. 2010 강의 자료(GC2010)의 지름 16.5cm는 쓰지 않음"}
 {"qid": "Q06", "artifact_id": "A002", "type": "fact", "query": "지장암 비로자나불상은 언제 만들어졌나요?", "expected": ["A002-03", "A002R1-03", "CUR003-001"], "distractors": [], "note": "정답 1622년(광해군 14년). 조성기로 확인"}
@@ -9,7 +9,7 @@
 {"qid": "Q09", "artifact_id": "A002", "type": "fact", "query": "불상 안에서는 무엇이 발견되었나요?", "expected": ["A002-03", "A002-05", "CUR003-006"], "distractors": [], "note": "정답 조성기·후령통·전적·다라니, 노란 보자기에 싼 은제 후령통"}
 {"qid": "Q10", "artifact_id": "A002", "type": "fact", "query": "이 불상을 만든 조각승 유파의 특징은 무엇인가요?", "expected": ["A002-04", "A002-05", "CUR003-010", "CUR003-011"], "distractors": ["D005-02"], "note": "정답 현진파, 왼팔 옆 Ω형 주름·발목 위 두 가닥 옷주름"}
 {"qid": "Q11", "artifact_id": "A003", "type": "conflict", "query": "백자 상감 연꽃 넝쿨무늬 대접은 언제 만들어졌나요?", "expected": ["A003-03"], "distractors": [], "note": "정답 15~16세기경(e뮤지엄). 큐레이터 글 CUR001-001은 '조선 15세기' - 해설은 e뮤지엄 값을 써야 함"}
-{"qid": "Q12", "artifact_id": "A003", "type": "fact", "query": "이 대접의 무늬는 어떤 기법으로 표현했나요?", "expected": ["CUR001-003", "CUR001-008", "A003-02"], "distractors": [], "note": "정답 상감(흑상감)"}
+{"qid": "Q12", "artifact_id": "A003", "type": "fact", "query": "이 대접의 무늬는 어떤 기법으로 표현했나요?", "expected": ["CUR001-003", "CUR001-008", "A003-02", "CUR001-007"], "distractors": [], "note": "정답 상감(흑상감)"}
 {"qid": "Q13", "artifact_id": "A003", "type": "fact", "query": "중국 청화백자와 이 대접은 무늬를 표현한 방식이 어떻게 다른가요?", "expected": ["CUR001-009"], "distractors": [], "note": "정답 청화는 윤곽 안을 채우고, 상감백자는 윤곽선만 흑상감"}
 {"qid": "Q14", "artifact_id": "A003", "type": "behind", "query": "조선 왕실에 중국 청화백자가 전해졌다는 확실한 기록은 언제인가요?", "expected": ["CUR001-006"], "distractors": [], "note": "정답 세종 10년(1428) 명 선덕제가 보냄. 비하인드(note) 청크 검색 확인"}
 {"qid": "Q15", "artifact_id": "A003", "type": "confusion", "query": "백자 상감 연꽃 넝쿨무늬 대접의 크기는 얼마인가요?", "expected": ["A003-01", "CUR001-001"], "distractors": ["D006-01"], "note": "정답 높이 7.6cm·입지름 17.5cm. D006은 이름이 같은 다른 대접(8.5cm·16.5cm)이라 필터를 끄면 섞일 수 있음"}

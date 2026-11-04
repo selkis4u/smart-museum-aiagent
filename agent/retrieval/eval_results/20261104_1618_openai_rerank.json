@@ -1,0 +1,585 @@
+{
+ "summary": {
+  "setting": "openai:text-embedding-3-small + BAAI/bge-reranker-v2-m3",
+  "pass": "17/20 (85%)",
+  "pass_goal_met": false,
+  "mixed_count": 0,
+  "mixed_goal_met": true,
+  "open_confused_count": 2,
+  "latency_sec": {
+   "mean": 4.449,
+   "max": 5.834
+  },
+  "by_artifact": {
+   "A001": "5/5",
+   "A002": "4/5",
+   "A003": "3/5",
+   "A004": "5/5"
+  }
+ },
+ "rows": [
+  {
+   "qid": "Q01",
+   "artifact_id": "A001",
+   "type": "confusion",
+   "query": "금령총 금관의 출자형 장식은 몇 단인가요?",
+   "expected": [
+    "A001-03"
+   ],
+   "top3": [
+    "A001-03",
+    "A001-02",
+    "GC2010-018"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "background"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "A001-03",
+    "GC2010-018",
+    "D002-02"
+   ],
+   "open_confused": [
+    "D002-02"
+   ]
+  },
+  {
+   "qid": "Q02",
+   "artifact_id": "A001",
+   "type": "fact",
+   "query": "금령총 금관에는 곡옥이 달려 있나요?",
+   "expected": [
+    "A001-03",
+    "A001-04"
+   ],
+   "top3": [
+    "A001-03",
+    "GC2010-018",
+    "GC2010-026"
+   ],
+   "kinds": [
+    "desc",
+    "background",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "A001-03",
+    "GC2010-018",
+    "GC2010-026"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q03",
+   "artifact_id": "A001",
+   "type": "fact",
+   "query": "금관의 사슴뿔 모양 장식 가지는 어떻게 붙였나요?",
+   "expected": [
+    "A001-04",
+    "GC2010-027"
+   ],
+   "top3": [
+    "GC2010-026",
+    "GC2010-027",
+    "GC2010-048"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "background"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "GC2010-023",
+    "GC2010-028",
+    "GC2010-026"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q04",
+   "artifact_id": "A001",
+   "type": "fact",
+   "query": "금령총에서 금관과 함께 나온 유물에는 무엇이 있나요?",
+   "expected": [
+    "A001-05"
+   ],
+   "top3": [
+    "GC2010-026",
+    "A001-01",
+    "A001-05"
+   ],
+   "kinds": [
+    "desc",
+    "meta",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "GC2010-024",
+    "A001-01",
+    "A001-03"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q05",
+   "artifact_id": "A001",
+   "type": "conflict",
+   "query": "금령총 금관의 크기는 얼마인가요?",
+   "expected": [
+    "A001-01"
+   ],
+   "top3": [
+    "A001-01",
+    "GC2010-026",
+    "GC2010-018"
+   ],
+   "kinds": [
+    "meta",
+    "desc",
+    "background"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "A001-01",
+    "GC2010-026",
+    "D001-01"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q06",
+   "artifact_id": "A002",
+   "type": "fact",
+   "query": "지장암 비로자나불상은 언제 만들어졌나요?",
+   "expected": [
+    "A002-03",
+    "A002R1-03",
+    "CUR003-001"
+   ],
+   "top3": [
+    "A002R1-03",
+    "A002R1-02",
+    "A002R1-01"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "meta"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "A002R1-03",
+    "BG2011-052",
+    "BG2011-053"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q07",
+   "artifact_id": "A002",
+   "type": "behind",
+   "query": "이 불상을 만드는 일을 감독한 사람은 누구인가요?",
+   "expected": [
+    "CUR003-012"
+   ],
+   "top3": [
+    "CUR003-002",
+    "A002-03",
+    "A002-05"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "desc"
+   ],
+   "pass": false,
+   "mixed": [],
+   "open_top3": [
+    "BG2011-003",
+    "CUR003-006",
+    "BG2011-011"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q08",
+   "artifact_id": "A002",
+   "type": "conflict",
+   "query": "누구의 발원으로 만든 불상인가요?",
+   "expected": [
+    "A002R1-03",
+    "CUR003-002",
+    "CUR003-009"
+   ],
+   "top3": [
+    "CUR003-002",
+    "CUR003-009",
+    "CUR003-006"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "CUR003-002",
+    "CUR003-009",
+    "CUR003-006"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q09",
+   "artifact_id": "A002",
+   "type": "fact",
+   "query": "불상 안에서는 무엇이 발견되었나요?",
+   "expected": [
+    "A002-03",
+    "A002-05",
+    "CUR003-006"
+   ],
+   "top3": [
+    "A002-03",
+    "CUR003-006",
+    "A002-04"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "A002-03",
+    "CUR003-006",
+    "BG2011-011"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q10",
+   "artifact_id": "A002",
+   "type": "fact",
+   "query": "이 불상을 만든 조각승 유파의 특징은 무엇인가요?",
+   "expected": [
+    "A002-04",
+    "A002-05",
+    "CUR003-010",
+    "CUR003-011"
+   ],
+   "top3": [
+    "A002-04",
+    "CUR003-002",
+    "CUR003-012"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "note"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "A002-04",
+    "CUR003-012",
+    "CUR003-015"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q11",
+   "artifact_id": "A003",
+   "type": "conflict",
+   "query": "백자 상감 연꽃 넝쿨무늬 대접은 언제 만들어졌나요?",
+   "expected": [
+    "A003-03"
+   ],
+   "top3": [
+    "CUR001-001",
+    "CUR001-012",
+    "A003-01"
+   ],
+   "kinds": [
+    "meta",
+    "desc",
+    "meta"
+   ],
+   "pass": false,
+   "mixed": [],
+   "open_top3": [
+    "CUR001-001",
+    "CUR001-012",
+    "A003-01"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q12",
+   "artifact_id": "A003",
+   "type": "fact",
+   "query": "이 대접의 무늬는 어떤 기법으로 표현했나요?",
+   "expected": [
+    "CUR001-003",
+    "CUR001-008",
+    "A003-02",
+    "CUR001-007"
+   ],
+   "top3": [
+    "CUR001-007",
+    "CUR001-012",
+    "A003-03"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "CUR001-007",
+    "A003-03",
+    "CUR001-003"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q13",
+   "artifact_id": "A003",
+   "type": "fact",
+   "query": "중국 청화백자와 이 대접은 무늬를 표현한 방식이 어떻게 다른가요?",
+   "expected": [
+    "CUR001-009"
+   ],
+   "top3": [
+    "CUR001-008",
+    "A003-03",
+    "CUR001-012"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "desc"
+   ],
+   "pass": false,
+   "mixed": [],
+   "open_top3": [
+    "CUR001-008",
+    "A003-03",
+    "CUR001-012"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q14",
+   "artifact_id": "A003",
+   "type": "behind",
+   "query": "조선 왕실에 중국 청화백자가 전해졌다는 확실한 기록은 언제인가요?",
+   "expected": [
+    "CUR001-006"
+   ],
+   "top3": [
+    "CUR001-006",
+    "CUR001-005",
+    "CUR001-012"
+   ],
+   "kinds": [
+    "note",
+    "background",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "CUR001-006",
+    "CUR001-005",
+    "CUR001-012"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q15",
+   "artifact_id": "A003",
+   "type": "confusion",
+   "query": "백자 상감 연꽃 넝쿨무늬 대접의 크기는 얼마인가요?",
+   "expected": [
+    "A003-01",
+    "CUR001-001"
+   ],
+   "top3": [
+    "A003-01",
+    "CUR001-001",
+    "CUR001-002"
+   ],
+   "kinds": [
+    "meta",
+    "meta",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "A003-01",
+    "D006-01",
+    "CUR001-001"
+   ],
+   "open_confused": [
+    "D006-01"
+   ]
+  },
+  {
+   "qid": "Q16",
+   "artifact_id": "A004",
+   "type": "conflict",
+   "query": "천흥사 동종의 높이는 얼마인가요?",
+   "expected": [
+    "A004-01"
+   ],
+   "top3": [
+    "A004-01",
+    "CUR002-003",
+    "CUR002-002"
+   ],
+   "kinds": [
+    "meta",
+    "meta",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "A004-01",
+    "CUR002-003",
+    "D010-01"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q17",
+   "artifact_id": "A004",
+   "type": "fact",
+   "query": "천흥사 종은 언제 만들어졌고 어떻게 알 수 있나요?",
+   "expected": [
+    "A004-04",
+    "CUR002-005"
+   ],
+   "top3": [
+    "CUR002-005",
+    "CUR002-003",
+    "NOTE001-003"
+   ],
+   "kinds": [
+    "desc",
+    "meta",
+    "note"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "CUR002-005",
+    "NOTE001-001",
+    "NOTE001-003"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q18",
+   "artifact_id": "A004",
+   "type": "confusion",
+   "query": "천흥사 종의 용뉴는 어떤 모양인가요?",
+   "expected": [
+    "A004-02",
+    "CUR002-004"
+   ],
+   "top3": [
+    "CUR002-004",
+    "A004-02",
+    "CUR002-005"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "CUR002-004",
+    "A004-02",
+    "CUR002-005"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q19",
+   "artifact_id": "A004",
+   "type": "behind",
+   "query": "천흥사 종은 박물관에 오기 전 어디에서 쓰였나요?",
+   "expected": [
+    "NOTE001-003",
+    "NOTE001-004"
+   ],
+   "top3": [
+    "NOTE001-003",
+    "NOTE001-005",
+    "CUR002-005"
+   ],
+   "kinds": [
+    "note",
+    "note",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "NOTE001-003",
+    "NOTE001-005",
+    "A004-01"
+   ],
+   "open_confused": []
+  },
+  {
+   "qid": "Q20",
+   "artifact_id": "A004",
+   "type": "confusion",
+   "query": "천흥사 종의 몸체에는 어떤 장식이 있나요?",
+   "expected": [
+    "A004-03",
+    "CUR002-004"
+   ],
+   "top3": [
+    "CUR002-005",
+    "A004-03",
+    "A004-04"
+   ],
+   "kinds": [
+    "desc",
+    "desc",
+    "desc"
+   ],
+   "pass": true,
+   "mixed": [],
+   "open_top3": [
+    "CUR002-005",
+    "A004-03",
+    "A004-04"
+   ],
+   "open_confused": []
+  }
+ ]
+}

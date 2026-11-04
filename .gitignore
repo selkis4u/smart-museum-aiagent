@@ -21,6 +21,7 @@ recordings/
 
 # 벡터 DB·로그
 chroma_db/
+agent/retrieval/cache/
 *.db
 *.sqlite3
 logs/
