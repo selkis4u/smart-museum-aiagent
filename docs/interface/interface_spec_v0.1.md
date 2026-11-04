@@ -140,6 +140,9 @@
 | 안내 재생 | `POST /api/audio/notice` | `{"zone_id","ment":"NOTICE_PROHIBITED_ITEM"}` | `{"ok":true}` |
 | 우선 재생 | `POST /api/audio/priority` | `{"zone_id","ment":"CAUTION"\|"WARNING"}` | `{"ok":true,"interrupted":{"zone_id","session_id","sentence_no"}\|null}` |
 | 정지 | `POST /api/audio/stop` | `{"zone_id"}` | `{"ok":true,"interrupted_sentence_no":4\|null,"cleared":3}` |
+| 미리 변환 **[11/4 결정]** | `POST /api/audio/prepare` | `{"zone_id","session_id","text"}` | `{"ok":true,"audio_file":"tmp/bridge/<session_id>.mp3"}` |
+
+- 미리 변환은 재생하지 않고 edge-tts로 음성 파일만 만들어 경로를 돌려준다(연결 멘트용). Agent는 일시정지 시점에 연결 멘트를 생성해 이 동작을 부르고, 해제되면 받은 경로를 해설 재생의 `audio_file`(`kind:"BRIDGE"`)로 보낸다. 해제 때 응답을 아직 받지 못했거나 실패했으면 `audio/ments/BRIDGE_COMMON.mp3`를 보낸다. 같은 세션의 파일은 덮어쓰고, 세션이 끝나면 Flask가 지운다.
 
 - `text`는 Flask가 edge-tts로 변환, `audio_file`은 미리 만든 파일(대체 해설·공통 연결 멘트)을 그대로 재생. 둘 중 하나만 보낸다.
 - 연결 멘트는 `kind:"BRIDGE"`, `sentence_no`는 재개할 문장 번호와 같게 보내고 해설 문장보다 먼저 재생한다.
