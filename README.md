@@ -8,6 +8,7 @@ smart-museum-ai-agent/
 ├── CONTEXT.md          # 도메인 용어집 (도슨트 세션, 침범, 해제 등)
 ├── docs/
 │   ├── adr/            # 설계 결정 기록 (Architecture Decision Records)
+│   ├── interface/      # 모듈 간 인터페이스 명세
 │   └── requirements/   # 요구사항 분석서·명세서
 ├── cv/                 # Computer Vision (김수환)
 ├── agent/              # Agentic AI (송용석)
