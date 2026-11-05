@@ -1,6 +1,6 @@
 # 개발 환경
 
-작성일 2026-11-05. 학원 실습(Ch01 플라스크 개발 준비, Ch02 Oracle DBMS 설치)에서 구성한 환경을 프로젝트 기준으로 정리한 문서입니다. 세 모듈 모두 시연 노트북 한 대(Windows, RAM 16GB, GPU 없음)에서 돌기 때문에(인터페이스 명세 0장) 같은 기준으로 맞춥니다.
+작성일 2026-11-05. 세 모듈 모두 시연 노트북 한 대(Windows, RAM 16GB, GPU 없음)에서 돌기 때문에(인터페이스 명세 0장) 같은 기준으로 맞춥니다.
 
 ## 1. 공통
 
@@ -29,8 +29,6 @@ C:\venvs\web\Scripts\activate
 pip install -r web\requirements.txt
 ```
 
-학원 실습처럼 `.cmd` 배치 파일(가상 환경 진입 + 폴더 이동 + `set FLASK_APP`·`set FLASK_DEBUG=1`)을 만들어 PATH에 두면 한 번에 들어갈 수 있습니다.
-
 ## 3. Web (Flask)
 
 학원 실습 "설치 버전들(final)" 기준입니다. 실제 설치된 값은 가상 환경에서 `pip freeze > web\requirements.txt`로 남깁니다.
@@ -40,20 +38,20 @@ pip install -r web\requirements.txt
 | Flask | 3.0.3 | 웹 서버, 도구용 API |
 | Jinja2 · Werkzeug · itsdangerous · MarkupSafe | 3.1.4 · 3.0.3 · 2.2.0 · 3.0.2 | Flask 기본 구성 |
 | Flask-SQLAlchemy · SQLAlchemy | 3.1.1 · 2.0.21 | ORM |
-| Flask-Migrate · alembic | 4.0.7 · 1.11.1 | 학원 실습 구성. 이 프로젝트는 테이블을 SQL Developer로 만들므로 `flask db`는 쓰지 않음(4장) |
-| Flask-WTF · email_validator | 1.2.2 · (학원 목록 값) | 관리자 로그인·유물 정보 입력 폼 |
+| Flask-Migrate · alembic | 4.0.7 · 1.11.1 | |
+| Flask-WTF · email_validator | 1.2.2 · | 관리자 로그인·유물 정보 입력 폼 |
 | Flask-Cors | 4.0.1 | |
 | python-dotenv | 1.0.1 | `.env` 읽기 |
 | dnspython · idna | 2.6.1 · 3.7 | email_validator 의존 패키지 |
 
-학원 목록에 없지만 이 프로젝트에 더 필요한 것:
+목록에 없지만 이 프로젝트에 더 필요한 것:
 
 | 패키지 | 용도 | 근거 |
 |---|---|---|
-| `oracledb` (python-oracledb) | Oracle 접속 드라이버. thin 모드라 Instant Client 불필요 | 4장 |
+| `oracledb` (python-oracledb) | Oracle 접속 드라이버. thin 모드라 Instant Client 불필요 |  |
 | Flask-SocketIO | CV 좌표 수신(`/cv`), 브라우저 갱신(`/admin`) | 인터페이스 명세 0장 |
 
-실행은 학원 실습과 같습니다.
+실행은 다음과 같습니다.
 
 ```bat
 set FLASK_APP=<앱 이름>
@@ -67,7 +65,7 @@ flask run
 
 | 항목 | 사용 | 비고 |
 |---|---|---|
-| DBMS | Oracle Database 18c Express Edition (XE) | 학원 실습 설치본. 무료, CPU 2스레드·메모리 2GB·데이터 12GB 제한 |
+| DBMS | Oracle Database 18c Express Edition (XE) | 무료, CPU 2스레드·메모리 2GB·데이터 12GB 제한 |
 | 접속 서비스 | `XEPDB1` (플러거블 DB) | `localhost:1521/XEPDB1` |
 | 관리 도구 | Oracle SQL Developer 19 이상 (JDK 11 필요) | **테이블 생성**, 데이터 확인, 쿼리 실행 |
 | 프로젝트 계정 | 전용 계정(예: `museum`) | 실습 계정(scott·hr)과 섞지 않음 |
@@ -104,5 +102,5 @@ SQLALCHEMY_DATABASE_URI = (
 
 ## 6. 버전을 바꿀 때
 
-- 학원 실습 버전과 다르게 올려야 하면 팀에 알리고 `requirements.txt`를 같이 고칩니다.
+- 버전과 다르게 올려야 하면 팀에 알리고 `requirements.txt`를 같이 고칩니다.
 - 새 PC에 설치할 때는 2장 순서대로 가상 환경을 만들고 `pip install -r ...`만 하면 같은 환경이 됩니다.
