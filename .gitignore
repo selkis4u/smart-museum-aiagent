@@ -42,4 +42,3 @@ Thumbs.db
 agent/knowledge/docs/
 # e뮤지엄 API 마지막 응답 디버그용 덤프(매 실행마다 바뀜)
 agent/knowledge/data/raw/last_response.txt
-.claude/
