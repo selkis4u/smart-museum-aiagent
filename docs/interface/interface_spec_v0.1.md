@@ -44,7 +44,7 @@
 | item_type | `TAKEOUT_CUP` |
 | session state | `IDLE`(대기) `SPEAKER_WAIT`(스피커 대기) `NARRATING`(해설) `PAUSED`(일시정지) `RESUMING`(재개) `COMPLETED_WAIT`(완료 대기) `ENDED`(종료) |
 | end reason | `LEFT_AFTER_COMPLETE`(완료 후 이탈) `LEFT_DURING_NARRATION`(해설 중 이탈) `LEFT_WHILE_PAUSED`(일시정지 중 이탈) `LEFT_WHILE_SPEAKER_WAIT`(스피커 대기 중 이탈) `NEW_SESSION`(새 세션 시작) |
-| ment | `CAUTION` `WARNING` `NOTICE_PROHIBITED_ITEM` `BRIDGE_COMMON` |
+| ment | `CAUTION` `WARNING` `NOTICE_PROHIBITED_ITEM` `BRIDGE_COMMON` `END_COMMON`(공통 마무리 멘트, 11/11 안건 9) |
 
 - Flask 응답: 성공 `{"ok": true, ...}`, 실패는 HTTP 4xx/5xx와 `{"ok": false, "error": {"code": "ZONE_NOT_FOUND", "message": "..."}}`.
 - 재시도와 중복: Agent는 도구 호출이 실패하면 1회 재시도한다(FR-WEB-16). 기록 저장 요청에는 `event_id`를 넣고 Flask는 같은 `event_id`가 이미 있으면 새로 만들지 않고 기존 결과를 돌려준다.
@@ -154,7 +154,7 @@
 - Agent는 null을 받으면 앞서 저장한 재개 위치를 그대로 둔다(덮어쓰지 않음). 예: 주의로 이미 멈춘 상태에서 5초가 지나 경고로 올라가 우선 재생을 다시 부르면 끊을 해설이 없어 null이 온다.
 - 응답 시점: Flask는 해설을 끊고 대기열을 비운 뒤 멘트 재생을 시작한 직후 응답한다. 멘트 재생이 끝날 때까지 기다리지 않는다(Agent의 조명·기록 호출이 늦어지지 않도록, NFR-02 1초).
 - 정지는 그 구역 대기열만 비운다(반복 주의·세션 종료·스피커 대기 중 이탈).
-- 미리 만든 음성 파일 위치: `audio/ments/CAUTION.mp3`, `audio/ments/WARNING.mp3`, `audio/ments/NOTICE_PROHIBITED_ITEM.mp3`, `audio/ments/BRIDGE_COMMON.mp3`, 대체 해설 `audio/fallback/A001/01.mp3`. `audio_file`에는 `audio/` 아래 상대 경로를 보낸다.
+- 미리 만든 음성 파일 위치: `audio/ments/CAUTION.mp3`, `audio/ments/WARNING.mp3`, `audio/ments/NOTICE_PROHIBITED_ITEM.mp3`, `audio/ments/BRIDGE_COMMON.mp3`, `audio/ments/END_COMMON.mp3`, 대체 해설 `audio/fallback/A001/01.mp3`. `audio_file`에는 `audio/` 아래 상대 경로를 보낸다.
 
 ### 4.4 기록 저장
 
@@ -260,5 +260,7 @@ CV 설정 도구가 쓰고, CV·Flask가 읽는다(Flask는 시작 시 1회, 읽
 | 3 | 우선 재생 때 요청 구역의 대기열도 비우기 | 김재원 | 스피커 대기 중인 구역(Z02)에 침범이 생기면, Z02가 미리 보낸 문장이 Flask 대기열에 남아 앞 구역(Z01) 원고가 끝날 때 일시정지 중인데도 재생됨. 4.3 문구에 "우선 재생은 끊긴 구역과 별도로 **요청한 `zone_id`의 대기열도 비운다**"를 추가. 재생 전에 멈춘 세션은 재개 때 1번 문장부터 다시 보냄 | |
 | 4 | 일시정지 구역의 스피커 보유 | 김재원 | 확인만: 일시정지된 구역은 `is_last` 문장을 재생하지 않았으므로 Flask는 스피커를 다음 구역에 넘기지 않는다. 넘김은 `is_last` 재생 끝 또는 정지 때만 | |
 | 5 | CLEARED가 ZONE_EMPTY보다 먼저 오는지 | 김수환 | 확인만: 침범자가 구역을 떠나면 해제 2초 판정이 구역 비움 10초보다 먼저 끝나므로 CLEARED가 먼저 와야 함. 트래킹 ID가 버려져 침범자에서 빠지는 경우도 같은 순서인지 확인. Agent는 순서가 어긋나도 일시정지 중 이탈로 끝내도록 방어 | |
-| 6 | 반복 주의 기준 문구 통일 | 전원 | Agent 판단이라 인터페이스 변경은 없음. `CONTEXT.md`는 "직전 침범(주의·경고) 해제 후 10초", FR-AG-12·결정사항은 "직전 주의 해제 후 10초". **직전 침범(주의·경고) 해제 후 10초**로 통일 제안(경고 해제 직후 다시 들어온 주의도 반복으로 봄) | |
+| 6 | 반복 주의 기준 문구 통일 | 전원 | 확인만: `CONTEXT.md`·결정사항·명세서 v0.4 FR-AG-12 모두 **직전 침범(주의·경고) 해제 후 10초**로 맞춰짐(경고 해제 직후 다시 들어온 주의도 반복으로 봄). 인터페이스 변경 없음 | |
 | 7 | 완료 대기 중 새 관람객의 머문 시간 초기화 | 송용석 | Agent가 판정하는 새 관람객 2초도 CV 관람 판정과 같이, 구역 단계가 NORMAL이 아니면 0으로 되돌림. 인터페이스 변경 없음, 결정사항에 문구 추가 | |
+| 8 | 해설 재생 응답에 스피커 상태 추가 | 김재원 | 응답을 `{"ok":true,"queue_length":3,"speaker":"PLAYING"\|"WAITING"}`로. 두 구역이 거의 동시에 관람 판정되면 둘 다 상황 조회에서 스피커가 비었다고 보고 해설 상태가 될 수 있음. 스피커 차례는 Flask가 정하므로, Agent는 첫 문장 응답의 `speaker`가 시작 때 판단과 다르면 상태를 바로잡고 상태 통지를 다시 보냄 | |
+| 9 | 공통 마무리 멘트 `END_COMMON` 추가 | 송용석·김재원 | 해설 도중 생성이 실패하면(한 문장 이상 재생한 뒤) Agent가 `{"kind":"SCRIPT","audio_file":"ments/END_COMMON.mp3","is_last":true}`를 보내 원고를 끝냄. Flask는 기존 해설 재생 그대로 처리(변경 없음), 파일은 Agent 담당이 edge-tts로 만듦 | |
