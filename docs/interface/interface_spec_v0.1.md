@@ -1,6 +1,6 @@
 # 인터페이스 명세 초안 v0.1
 
-작성일 2026-11-03. 모듈 간 연결 형식 초안입니다. 6장 체크리스트 9개는 11/3에 결정했고(**[11/3 결정]** 표시), 나머지는 결정사항·명세서 v0.3을 그대로 옮긴 것이며 세부 형식은 추후 결정합니다. 7장 안건을 11/11에 확정하면 v1.0으로 올리고 각 모듈은 이 문서만 보고 가짜 데이터로 개발합니다(NFR-14).
+작성일 2026-11-03, 수정 2026-11-05(2장 이벤트 DTO 확정안). 모듈 간 연결 형식 초안입니다. 6장 체크리스트 9개는 11/3에 결정했고(**[11/3 결정]** 표시), 나머지는 결정사항·명세서 v0.3을 그대로 옮긴 것이며 세부 형식은 추후 결정합니다. 7장 안건을 11/11에 확정하면 v1.0으로 올리고 각 모듈은 이 문서만 보고 가짜 데이터로 개발합니다(NFR-14).
 
 ## 0. 연결 구성
 
@@ -50,7 +50,11 @@
 - 재시도와 중복: Agent는 도구 호출이 실패하면 1회 재시도한다(FR-WEB-16). 기록 저장 요청에는 `event_id`를 넣고 Flask는 같은 `event_id`가 이미 있으면 새로 만들지 않고 기존 결과를 돌려준다.
 - 타임아웃(제안): 조명·음성 API 1초(NFR-02 1초 안에 들어오도록), 기록·상태 API 3초.
 
-## 2. CV → Agent 이벤트 DTO
+## 2. CV → Agent 이벤트 DTO **[11/5 Agent 확정안, CV 확인 대기]**
+
+필드는 아래 표로 확정을 제안한다(7장 안건 1). 스키마 `schema/cv_event.schema.json`, 검사기 `schema/validate_cv_events.py`, 가짜 이벤트 샘플 `samples/cv_events_scenario.jsonl`(2.2)을 함께 둔다. CV는 보낼 이벤트를 JSONL로 남겨 검사기로 확인하고, Agent·Web은 샘플로 먼저 개발한다(NFR-14).
+
+### 2.1 필드
 
 | 필드 | 타입 | 설명 |
 |---|---|---|
@@ -78,6 +82,31 @@
 
 - CAUTION_TIMEOUT(주의 5초 지속 → 경고)도 LEVEL_CHANGE로 보낸다. 단계가 같은 채로 원인만 바뀌거나(이미 경고인데 TOUCH) 침범자만 늘어나는 경우는 보내지 않는다. 늘어난 침범자는 CLEARED의 `visitor_ids`로 전달된다.
 - **[11/3 결정]** 판정 세부: VIEWING_START는 구역이 빈 뒤 다음 ZONE_EMPTY까지 한 번만 보내고, 판정 전에 단계가 NORMAL이 아니게 되면 머문 시간을 0으로 되돌려 해제 후 다시 2초를 센다. 침범자의 트래킹 ID가 끊기면 트래커가 ID를 유지하는 동안(track_buffer)은 침범 중으로 보고, 버려지면 침범자에서 빼고 해제를 판정한다. PROHIBITED_ITEM은 같은 관람객이 같은 구역을 나간 뒤 30초 안에 다시 들어오면 보내지 않는다.
+
+### 2.2 종류별 값 규칙
+
+| type | prev_level → level | cause | visitor_ids | item_type |
+|---|---|---|---|---|
+| `LEVEL_CHANGE` 침범 시작 | `NORMAL` → `CAUTION` | `LINE_1` | 침범자 1명 이상 | null |
+| | `NORMAL` → `WARNING` | `LINE_2` · `TOUCH` | 침범자 1명 이상 | null |
+| `LEVEL_CHANGE` 승격 | `CAUTION` → `WARNING` | `LINE_2` · `TOUCH` · `CAUTION_TIMEOUT` | 그 시점 침범자 | null |
+| `LEVEL_CHANGE` 해제 | `CAUTION`·`WARNING` → `NORMAL` | `CLEARED` | 그 침범 동안의 침범자 전원 | null |
+| `VIEWING_START` | `NORMAL` = `NORMAL` | null | 판정 시점 구역 관람객(1명 이상) | null |
+| `ZONE_EMPTY` | 현재 단계 = 현재 단계 | null | `[]` | null |
+| `PROHIBITED_ITEM` | 현재 단계 = 현재 단계 | null | 소지자 1명 | `TAKEOUT_CUP` |
+
+- `WARNING` → `CAUTION` 강등은 없다(경고는 해제될 때까지 경고).
+- 모든 필드를 항상 넣는다. 해당 없는 값은 빼지 말고 `null`(배열은 `[]`).
+- 같은 구역의 `prev_level`은 그 구역에 직전에 보낸 `level`과 같아야 한다(검사기가 확인).
+- `samples/cv_events_scenario.jsonl` 13건: Z01 관람 판정 → 주의(LINE_1) → 주의 5초 경고(CAUTION_TIMEOUT) → 해제 → 10초 안에 다시 주의(반복 주의) → 경고 승격(LINE_2) → 해제 → 접촉 시도 경고 직행(TOUCH) → 해제, Z02 금지물품 → 관람 판정 → 구역 비움, Z01 구역 비움.
+
+### 2.3 전송·수신 규칙 **[11/5 Agent 확정안]**
+
+- CV는 Socket.IO `emit("cv_event", dto, namespace="/events")`로 보낸다. 이벤트 하나에 메시지 하나, 묶어 보내지 않는다.
+- Agent는 ack로 `{"ok":true,"event_id":"..."}`(형식 오류면 `{"ok":false,"event_id":"...","error":"..."}`)를 돌려준다. **CV는 ack를 기다리거나 재전송하지 않는다**(로그용). 끊긴 동안의 이벤트를 쌓아 두지 않는 0장 규칙과 같다.
+- Agent는 형식 오류 이벤트를 로그만 남기고 버린다. 같은 `event_id`가 다시 오면 무시한다.
+- `seq`가 건너뛰면(누락) Agent는 로그를 남기고 `GET /api/zones/status`로 구역 단계를 다시 맞춘다(0장 재접속 동기화와 같은 처리). 재연결 뒤 `seq`는 1부터 다시 시작한다.
+- `timestamp`는 판정한 프레임 시각이다. Agent는 받은 시각과의 차이를 지연(NFR-02)으로 기록한다.
 
 ## 3. CV → Flask 좌표 메시지 (초당 5회)
 
@@ -255,7 +284,7 @@ CV 설정 도구가 쓰고, CV·Flask가 읽는다(Flask는 시작 시 1회, 읽
 
 | No | 안건 | 관련 | 제안 | 결정 |
 |---|---|---|---|---|
-| 1 | 이벤트 DTO 필드 확정 | 김수환·송용석 | 2장 표·예시 그대로 확정 (필드 추가·변경 없음) | |
+| 1 | 이벤트 DTO 필드 확정 | 김수환·송용석 | 2장 표·예시 그대로 확정 (필드 추가·변경 없음). 11/5 종류별 값 규칙(2.2)·전송 규칙(2.3)·스키마·샘플 추가 | 11/5 Agent 확정안 통지, CV 확인 대기 |
 | 2 | 상황 조회 `audio`에 재생 종류 추가 | 김재원 | `audio.kind`: `SCRIPT` `BRIDGE` `MENT` null. 연결 멘트는 재개할 문장과 같은 `sentence_no`로 보내므로(4.3) 번호만으로는 연결 멘트가 끝나고 해설이 다시 시작된 시점(재개 → 해설 전이)을 알 수 없음 | |
 | 3 | 우선 재생 때 요청 구역의 대기열도 비우기 | 김재원 | 스피커 대기 중인 구역(Z02)에 침범이 생기면, Z02가 미리 보낸 문장이 Flask 대기열에 남아 앞 구역(Z01) 원고가 끝날 때 일시정지 중인데도 재생됨. 4.3 문구에 "우선 재생은 끊긴 구역과 별도로 **요청한 `zone_id`의 대기열도 비운다**"를 추가. 재생 전에 멈춘 세션은 재개 때 1번 문장부터 다시 보냄 | |
 | 4 | 일시정지 구역의 스피커 보유 | 김재원 | 확인만: 일시정지된 구역은 `is_last` 문장을 재생하지 않았으므로 Flask는 스피커를 다음 구역에 넘기지 않는다. 넘김은 `is_last` 재생 끝 또는 정지 때만 | |
@@ -264,3 +293,28 @@ CV 설정 도구가 쓰고, CV·Flask가 읽는다(Flask는 시작 시 1회, 읽
 | 7 | 완료 대기 중 새 관람객의 머문 시간 초기화 | 송용석 | Agent가 판정하는 새 관람객 2초도 CV 관람 판정과 같이, 구역 단계가 NORMAL이 아니면 0으로 되돌림. 인터페이스 변경 없음, 결정사항에 문구 추가 | |
 | 8 | 해설 재생 응답에 스피커 상태 추가 | 김재원 | 응답을 `{"ok":true,"queue_length":3,"speaker":"PLAYING"\|"WAITING"}`로. 두 구역이 거의 동시에 관람 판정되면 둘 다 상황 조회에서 스피커가 비었다고 보고 해설 상태가 될 수 있음. 스피커 차례는 Flask가 정하므로, Agent는 첫 문장 응답의 `speaker`가 시작 때 판단과 다르면 상태를 바로잡고 상태 통지를 다시 보냄 | |
 | 9 | 공통 마무리 멘트 `END_COMMON` 추가 | 송용석·김재원 | 해설 도중 생성이 실패하면(한 문장 이상 재생한 뒤) Agent가 `{"kind":"SCRIPT","audio_file":"ments/END_COMMON.mp3","is_last":true}`를 보내 원고를 끝냄. Flask는 기존 해설 재생 그대로 처리(변경 없음), 파일은 Agent 담당이 edge-tts로 만듦 | |
+| 10 | 세션 기록에 `generation_failed` 추가 | 송용석·김재원 | 해설 도중 생성 실패(한 문장 이상 재생 뒤 `END_COMMON`으로 마무리)는 `fallback_used=false`라 기록에서 구분되지 않음. `POST /api/records/sessions`에 `"generation_failed": true\|false`를 추가(상태도 3장, `docs/design/db/` 세션 테이블) | |
+
+## 8. 유물 기본 정보 (Web 유물 DB 초기 데이터) **[11/5 Agent 제안]**
+
+Agent가 e뮤지엄 소장품 정보로 유물 4점(A001~A004)의 기본 정보를 만들어 `samples/artifacts_seed.json`으로 넘긴다(FR-WEB-02). Web은 이 파일로 유물 테이블을 처음 채우고, 이후 수정은 관리 화면에서 한다. 다시 만들 때는 `python agent/knowledge/export_artifacts.py`(오프라인, API 키 불필요). 테이블 설계 제안은 `docs/design/db/`.
+
+| 필드 | 예시 | 설명 |
+|---|---|---|
+| `artifact_id` | `A001` | 세 모듈 공통 키 |
+| `collection_no` | `본관9663` | 소장품 번호 |
+| `emuseum_id` | `PS0100100100100966300000` | e뮤지엄 소장품 ID |
+| `name` | `금령총 금관` | 화면 표시 이름(Agent 해설 질의와 같은 표기) |
+| `name_official` | `보물 금령총 금관(1963), 金鈴塚 金冠` | e뮤지엄 공식 명칭 |
+| `era` / `era_detail` | `조선` / `1622년` | 시대, 제작 연도(없으면 null) |
+| `museum` | `국립중앙박물관` | 소장처 |
+| `designation` | `보물` | 국보·보물 등 지정 구분 |
+| `material` / `size` / `author` | `금속 > 금` / `전체높이 49.2cm, 높이 27.0cm` / null | e뮤지엄 값 |
+| `description` | | e뮤지엄 소장품 설명 원문 |
+| `display_kind` | `SHOWCASE` | 전시 형태, 공간 설정 파일 `kind`와 같은 값 |
+| `role` | `DEMO` | `DEMO` 시연 유물(A001·A002), `SPARE` 교체용 유물(A003·A004) |
+| `related_items` | `[{collection_no, emuseum_id, name, designation}]` | 따로 등록하지 않는 부속 소장품(A002 복장물 3건), 조회 화면 참고용 |
+
+- 이미지 URL은 넣지 않는다. e뮤지엄 응답의 이미지 주소에 인증키가 섞여 있어서다. 화면에 사진이 필요하면 Web이 따로 받아 정적 파일로 둔다.
+- 혼동 테스트용 유사 유물(D001~D011)은 넣지 않는다(1장 ID 규칙).
+
