@@ -40,7 +40,7 @@ pip install -r web\requirements.txt
 | Flask | 3.0.3 | 웹 서버, 도구용 API |
 | Jinja2 · Werkzeug · itsdangerous · MarkupSafe | 3.1.4 · 3.0.3 · 2.2.0 · 3.0.2 | Flask 기본 구성 |
 | Flask-SQLAlchemy · SQLAlchemy | 3.1.1 · 2.0.21 | ORM |
-| Flask-Migrate · alembic | 4.0.7 · 1.11.1 | 테이블 생성·변경(`flask db migrate`, `flask db upgrade`) |
+| Flask-Migrate · alembic | 4.0.7 · 1.11.1 | 학원 실습 구성. 이 프로젝트는 테이블을 SQL Developer로 만들므로 `flask db`는 쓰지 않음(4장) |
 | Flask-WTF · email_validator | 1.2.2 · (학원 목록 값) | 관리자 로그인·유물 정보 입력 폼 |
 | Flask-Cors | 4.0.1 | |
 | python-dotenv | 1.0.1 | `.env` 읽기 |
@@ -69,7 +69,7 @@ flask run
 |---|---|---|
 | DBMS | Oracle Database 18c Express Edition (XE) | 학원 실습 설치본. 무료, CPU 2스레드·메모리 2GB·데이터 12GB 제한 |
 | 접속 서비스 | `XEPDB1` (플러거블 DB) | `localhost:1521/XEPDB1` |
-| 관리 도구 | Oracle SQL Developer 19 이상 (JDK 11 필요) | 테이블 확인, 쿼리 실행 |
+| 관리 도구 | Oracle SQL Developer 19 이상 (JDK 11 필요) | **테이블 생성**, 데이터 확인, 쿼리 실행 |
 | 프로젝트 계정 | 전용 계정(예: `museum`) | 실습 계정(scott·hr)과 섞지 않음 |
 | 설계 문서 | `docs/design/db/` | ERD, DDL, 통계 쿼리, Oracle 주의점 |
 
@@ -82,6 +82,8 @@ GRANT CONNECT, RESOURCE, UNLIMITED TABLESPACE TO museum;
 ```
 
 `XEPDB1` 안에 만들면 실습 때 쓴 `_ORACLE_SCRIPT` 설정 없이 일반 계정을 만들 수 있습니다.
+
+**테이블 만들기**: 위 계정으로 SQL Developer에 접속해 `docs/design/db/schema_draft.sql`을 스크립트 실행(F5)합니다. Flask는 이 테이블에 연결만 합니다(`docs/design/db/README.md` 6장).
 
 **Flask 접속 설정** (`config.py`, 비밀번호는 `.env`)
 

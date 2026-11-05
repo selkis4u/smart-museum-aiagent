@@ -148,16 +148,14 @@ erDiagram
 
 - 학원 실습에서 설치한 **Oracle Database 18c XE**를 씁니다(설치·계정 만들기는 `docs/dev_environment.md` 4장). CPU 2스레드, 메모리 2GB, 데이터 12GB 제한이 있어서 같은 노트북의 CV(YOLO)와 Re-ranker 자원을 많이 쓰지 않습니다. 시연 데이터는 기록 수백 건이라 용량도 충분합니다. DDL은 12c 이상 문법만 써서 18c XE에서도 돌아가야 하지만, 이 문서의 실행 확인은 Oracle Database Free 23ai에서 했으므로 18c XE에서 `check_oracle.py`로 한 번 다시 확인합니다.
 - Python은 **`python-oracledb`** thin 모드를 씁니다. Instant Client를 따로 설치하지 않아도 됩니다. SQLAlchemy 접속 주소는 `oracle+oracledb://<계정>:<비밀번호>@localhost:1521/?service_name=XEPDB1`입니다. 비밀번호는 저장소에 올리지 말고 `.env`에 둡니다(NFR-11).
-- **테이블 만드는 방법은 둘 중 하나만 씁니다.** 섞으면 Flask-Migrate가 모르는 테이블이 생겨 다음 마이그레이션이 꼬입니다.
-  - **(A) Flask-Migrate (학원 실습 방식)**: `models.py`에 이 문서의 테이블을 모델로 쓰고 `flask db migrate` → `flask db upgrade`. 이때 `schema_draft.sql`은 열 이름·타입·제약의 기준표로 씁니다. 시각은 `db.TIMESTAMP`, 참/거짓은 `db.Boolean`, JSON 배열은 `db.Text`로 두고, 열거값 CHECK가 필요하면 `db.CheckConstraint`로 추가합니다.
-  - **(B) SQL Developer**: 아래 방법으로 `schema_draft.sql`을 실행하고, Flask는 만들어진 테이블에 연결만 합니다(`flask db`는 쓰지 않음).
-- **(B) 테이블 만들기 (Oracle SQL Developer)**: 계정으로 접속 → `schema_draft.sql` 내용을 워크시트에 붙여 넣기 → **스크립트 실행(F5)**. F5는 여러 문장을 차례로 실행하고, Ctrl+Enter(명령문 실행)는 커서가 있는 한 문장만 실행합니다. 만든 뒤 왼쪽 접속 트리의 "테이블"에서 6개를 확인하고, 통계 쿼리는 `stats_queries.sql`의 SELECT를 하나씩 Ctrl+Enter로 돌려 봅니다.
-- (A)·(B) 어느 쪽이든 4장 1번(밀리초)과 2번(빈 문자열)은 지켜야 합니다.
+- **테이블은 Oracle SQL Developer로 만듭니다 [11/5 결정].** 계정으로 접속 → `schema_draft.sql` 내용을 워크시트에 붙여 넣기 → **스크립트 실행(F5)**. F5는 여러 문장을 차례로 실행하고, Ctrl+Enter(명령문 실행)는 커서가 있는 한 문장만 실행합니다. 만든 뒤 왼쪽 접속 트리의 "테이블"에서 6개를 확인하고, 통계 쿼리는 `stats_queries.sql`의 SELECT를 하나씩 Ctrl+Enter로 돌려 봅니다.
+- **Flask는 만들어진 테이블에 연결만 합니다.** Flask-SQLAlchemy 모델은 `schema_draft.sql`과 같은 열 이름·타입으로 쓰고, `flask db migrate`·`flask db upgrade`(Flask-Migrate)나 `db.create_all()`로 테이블을 만들지 않습니다. 두 곳에서 테이블을 만들면 정의가 어긋나기 때문입니다. 테이블을 바꿀 때는 `schema_draft.sql`을 먼저 고치고 SQL Developer에서 `ALTER TABLE`로 반영한 뒤 모델을 맞춥니다.
+- 모델을 쓸 때도 4장 1번(시각은 `db.TIMESTAMP`)과 2번(빈 문자열)은 지켜야 합니다.
 - 테이블을 만든 뒤 빈 검증용 계정에서 `python docs/design/db/check_oracle.py`로 한 번 확인합니다(실행 방법은 파일 머리말). 이 스크립트는 같은 이름의 테이블을 지우고 다시 만들므로 시연용 계정에는 돌리지 않습니다.
 
 ## 7. Web 확인 요청
 
-1. Oracle 18c XE 사용과, 테이블 만드는 방법 (A) Flask-Migrate / (B) SQL Developer 중 어느 쪽으로 할지
+1. Oracle 18c XE 사용과, 테이블은 SQL Developer로 만들고 Flask는 연결만 하는 방식(6장)
 2. 시각 저장 방식(4장 4번): 오프셋을 떼어 저장하는 방식에 동의하는지
 3. `start_level` 열 추가(API 변경 없음)와 `size` → `size_info` 이름 변경에 동의하는지
 4. 명세 7장 안건 10 `generation_failed` 필드 추가

@@ -21,8 +21,8 @@ smart-museum-ai-agent/
 | 구분 | 사용 |
 | --- | --- |
 | 언어·도구 | Python 3.11.9, 가상 환경(venv, 모듈별), PyCharm Community, Git·GitHub |
-| Web | Flask 3.0.3, Flask-SQLAlchemy 3.1.1, Flask-Migrate 4.0.7, Flask-WTF, Flask-SocketIO |
-| DB | Oracle Database 18c XE, Oracle SQL Developer, python-oracledb |
+| Web | Flask 3.0.3, Flask-SQLAlchemy 3.1.1, Flask-WTF, Flask-SocketIO |
+| DB | Oracle Database 18c XE, Oracle SQL Developer(테이블 생성·관리), python-oracledb |
 | Agent | LangGraph, OpenAI API, ChromaDB, BM25(kiwi), bge-reranker-v2-m3 |
 
 자세한 버전과 설치 순서는 [`docs/dev_environment.md`](docs/dev_environment.md)를 봅니다.
