@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cv_event.schema.json",
+  "title": "CV → Agent 이벤트 DTO (interface_spec 2장)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "event_id",
+    "seq",
+    "zone_id",
+    "artifact_id",
+    "prev_level",
+    "level",
+    "cause",
+    "visitor_ids",
+    "item_type",
+    "timestamp"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "LEVEL_CHANGE",
+        "VIEWING_START",
+        "ZONE_EMPTY",
+        "PROHIBITED_ITEM"
+      ]
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt-[0-9]{8}-[0-9]{9}-[0-9]{4}$"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "zone_id": {
+      "type": "string",
+      "pattern": "^Z[0-9]{2}$"
+    },
+    "artifact_id": {
+      "type": "string",
+      "pattern": "^A[0-9]{3}$"
+    },
+    "prev_level": {
+      "enum": [
+        "NORMAL",
+        "CAUTION",
+        "WARNING"
+      ]
+    },
+    "level": {
+      "enum": [
+        "NORMAL",
+        "CAUTION",
+        "WARNING"
+      ]
+    },
+    "cause": {
+      "enum": [
+        "LINE_1",
+        "LINE_2",
+        "TOUCH",
+        "CAUTION_TIMEOUT",
+        "CLEARED",
+        null
+      ]
+    },
+    "visitor_ids": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "uniqueItems": true
+    },
+    "item_type": {
+      "enum": [
+        "TAKEOUT_CUP",
+        null
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}\\+09:00$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "LEVEL_CHANGE"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "cause": {
+            "enum": [
+              "LINE_1",
+              "LINE_2",
+              "TOUCH",
+              "CAUTION_TIMEOUT",
+              "CLEARED"
+            ]
+          },
+          "item_type": {
+            "const": null
+          },
+          "visitor_ids": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "LEVEL_CHANGE"
+          },
+          "cause": {
+            "const": "CLEARED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "level": {
+            "const": "NORMAL"
+          },
+          "prev_level": {
+            "enum": [
+              "CAUTION",
+              "WARNING"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "LEVEL_CHANGE"
+          },
+          "cause": {
+            "const": "LINE_1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "prev_level": {
+            "const": "NORMAL"
+          },
+          "level": {
+            "const": "CAUTION"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "LEVEL_CHANGE"
+          },
+          "cause": {
+            "const": "CAUTION_TIMEOUT"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "prev_level": {
+            "const": "CAUTION"
+          },
+          "level": {
+            "const": "WARNING"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "LEVEL_CHANGE"
+          },
+          "cause": {
+            "enum": [
+              "LINE_2",
+              "TOUCH"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "prev_level": {
+            "enum": [
+              "NORMAL",
+              "CAUTION"
+            ]
+          },
+          "level": {
+            "const": "WARNING"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "VIEWING_START",
+              "ZONE_EMPTY",
+              "PROHIBITED_ITEM"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "cause": {
+            "const": null
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "VIEWING_START"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "item_type": {
+            "const": null
+          },
+          "visitor_ids": {
+            "minItems": 1
+          },
+          "level": {
+            "const": "NORMAL"
+          },
+          "prev_level": {
+            "const": "NORMAL"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ZONE_EMPTY"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "item_type": {
+            "const": null
+          },
+          "visitor_ids": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "PROHIBITED_ITEM"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "item_type": {
+            "const": "TAKEOUT_CUP"
+          },
+          "visitor_ids": {
+            "minItems": 1,
+            "maxItems": 1
+          }
+        }
+      }
+    }
+  ]
+}
