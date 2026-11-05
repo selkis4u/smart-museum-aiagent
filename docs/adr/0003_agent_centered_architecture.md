@@ -14,7 +14,7 @@ CV의 이벤트 DTO는 Agent(LangGraph)로만 보내고, Agent가 상황을 판�
 
 ## Consequences
 
-- 통신: CV → Agent는 WebSocket(Agent가 서버), Agent → Flask는 MCP 도구가 Flask API를 호출, 브라우저 화면은 Flask WebSocket.
+- 통신: CV → Agent는 Socket.IO(Agent가 서버), Agent → Flask는 MCP 도구가 Flask API를 호출, 브라우저 화면은 Flask Socket.IO. (2026-11-05 변경: CV → Agent를 순수 WebSocket에서 Socket.IO로 바꿔 CV가 좌표 송신과 같은 클라이언트 라이브러리를 씀)
 - 관람객 좌표(맵 표시용)와 구역별 현재 위험 단계는 판단이 필요 없으므로 CV → Flask로 직접 보낸다. Web은 이 값으로 구역 색과 경고 알림을 표시한다.
 - 세션 상태(대기·스피커 대기·해설·일시정지·재개·완료 대기·종료)는 Agent만 알기 때문에 상태 통지 MCP 도구로 Flask에 알린다. (2026-11-02 추가, 2026-11-03 상태 목록 보완)
 - 침범 기록도 Agent가 기록 저장 도구로 만든다(ADR-0002). (2026-11-03 추가)
