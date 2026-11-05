@@ -309,7 +309,7 @@ Agent가 e뮤지엄 소장품 정보로 유물 4점(A001~A004)의 기본 정보�
 | `era` / `era_detail` | `조선` / `1622년` | 시대, 제작 연도(없으면 null) |
 | `museum` | `국립중앙박물관` | 소장처 |
 | `designation` | `보물` | 국보·보물 등 지정 구분 |
-| `material` / `size` / `author` | `금속 > 금` / `전체높이 49.2cm, 높이 27.0cm` / null | e뮤지엄 값 |
+| `material` / `size` / `author` | `금속 > 금` / `전체높이 49.2cm, 높이 27.0cm` / null | e뮤지엄 값. `size`는 Oracle 예약어라 DB 열 이름은 `size_info` |
 | `description` | | e뮤지엄 소장품 설명 원문 |
 | `display_kind` | `SHOWCASE` | 전시 형태, 공간 설정 파일 `kind`와 같은 값 |
 | `role` | `DEMO` | `DEMO` 시연 유물(A001·A002), `SPARE` 교체용 유물(A003·A004) |
