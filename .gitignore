@@ -35,6 +35,7 @@ Thumbs.db
 # Office 임시 잠금 파일 (Word·Excel·PowerPoint가 열려 있을 때 생성)
 ~$*
 
+
 # Agent 지식 자료(agent/knowledge)
 # - 청크·API 원본 응답은 팀이 함께 쓰므로 위의 data/ 제외에서 예외로 둔다
 # - 원본 PDF는 저작권(학술논문·이용조건 미표시 자료) 때문에 커밋하지 않고 각자 보관
