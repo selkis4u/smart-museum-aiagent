@@ -293,3 +293,28 @@ CV 설정 도구가 쓰고, CV·Flask가 읽는다(Flask는 시작 시 1회, 읽
 | 7 | 완료 대기 중 새 관람객의 머문 시간 초기화 | 송용석 | Agent가 판정하는 새 관람객 2초도 CV 관람 판정과 같이, 구역 단계가 NORMAL이 아니면 0으로 되돌림. 인터페이스 변경 없음, 결정사항에 문구 추가 | |
 | 8 | 해설 재생 응답에 스피커 상태 추가 | 김재원 | 응답을 `{"ok":true,"queue_length":3,"speaker":"PLAYING"\|"WAITING"}`로. 두 구역이 거의 동시에 관람 판정되면 둘 다 상황 조회에서 스피커가 비었다고 보고 해설 상태가 될 수 있음. 스피커 차례는 Flask가 정하므로, Agent는 첫 문장 응답의 `speaker`가 시작 때 판단과 다르면 상태를 바로잡고 상태 통지를 다시 보냄 | |
 | 9 | 공통 마무리 멘트 `END_COMMON` 추가 | 송용석·김재원 | 해설 도중 생성이 실패하면(한 문장 이상 재생한 뒤) Agent가 `{"kind":"SCRIPT","audio_file":"ments/END_COMMON.mp3","is_last":true}`를 보내 원고를 끝냄. Flask는 기존 해설 재생 그대로 처리(변경 없음), 파일은 Agent 담당이 edge-tts로 만듦 | |
+| 10 | 세션 기록에 `generation_failed` 추가 | 송용석·김재원 | 해설 도중 생성 실패(한 문장 이상 재생 뒤 `END_COMMON`으로 마무리)는 `fallback_used=false`라 기록에서 구분되지 않음. `POST /api/records/sessions`에 `"generation_failed": true\|false`를 추가(상태도 3장, `docs/design/db/` 세션 테이블) | |
+
+## 8. 유물 기본 정보 (Web 유물 DB 초기 데이터) **[11/5 Agent 제안]**
+
+Agent가 e뮤지엄 소장품 정보로 유물 4점(A001~A004)의 기본 정보를 만들어 `samples/artifacts_seed.json`으로 넘긴다(FR-WEB-02). Web은 이 파일로 유물 테이블을 처음 채우고, 이후 수정은 관리 화면에서 한다. 다시 만들 때는 `python agent/knowledge/export_artifacts.py`(오프라인, API 키 불필요). 테이블 설계 제안은 `docs/design/db/`.
+
+| 필드 | 예시 | 설명 |
+|---|---|---|
+| `artifact_id` | `A001` | 세 모듈 공통 키 |
+| `collection_no` | `본관9663` | 소장품 번호 |
+| `emuseum_id` | `PS0100100100100966300000` | e뮤지엄 소장품 ID |
+| `name` | `금령총 금관` | 화면 표시 이름(Agent 해설 질의와 같은 표기) |
+| `name_official` | `보물 금령총 금관(1963), 金鈴塚 金冠` | e뮤지엄 공식 명칭 |
+| `era` / `era_detail` | `조선` / `1622년` | 시대, 제작 연도(없으면 null) |
+| `museum` | `국립중앙박물관` | 소장처 |
+| `designation` | `보물` | 국보·보물 등 지정 구분 |
+| `material` / `size` / `author` | `금속 > 금` / `전체높이 49.2cm, 높이 27.0cm` / null | e뮤지엄 값 |
+| `description` | | e뮤지엄 소장품 설명 원문 |
+| `display_kind` | `SHOWCASE` | 전시 형태, 공간 설정 파일 `kind`와 같은 값 |
+| `role` | `DEMO` | `DEMO` 시연 유물(A001·A002), `SPARE` 교체용 유물(A003·A004) |
+| `related_items` | `[{collection_no, emuseum_id, name, designation}]` | 따로 등록하지 않는 부속 소장품(A002 복장물 3건), 조회 화면 참고용 |
+
+- 이미지 URL은 넣지 않는다. e뮤지엄 응답의 이미지 주소에 인증키가 섞여 있어서다. 화면에 사진이 필요하면 Web이 따로 받아 정적 파일로 둔다.
+- 혼동 테스트용 유사 유물(D001~D011)은 넣지 않는다(1장 ID 규칙).
+
