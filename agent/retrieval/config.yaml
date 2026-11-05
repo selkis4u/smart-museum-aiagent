@@ -44,6 +44,9 @@ reranker:
   torch_threads: 2             # CPU 전용 노트북에서 CV와 코어를 나눠 쓰도록 제한
 
 # 결과(와 재순위화 후보)에 넣을 kind=background(시대 배경) 청크 최대 수. 빼면 제한 없음
+chunk_header:                  # 검색용 머리말: 청크 앞에 [유물명]을 붙여 임베딩·BM25·Re-ranking에 쓴다
+  enabled: true                # 청크 원문(chunks.jsonl)과 LLM에 넘기는 근거 text는 바꾸지 않는다. 바꾸면 build_index.py 다시 실행
+  targets: ../knowledge/targets.json   # 유물명 출처(memo의 첫 쉼표 앞, e뮤지엄 표기)
 background_max: 1
 
 top_k: 3                       # 해설 생성에 넘길 근거 수(NFR-17은 상위 3개 기준)

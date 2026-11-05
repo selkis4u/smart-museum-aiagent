@@ -14,7 +14,8 @@ from collections import Counter
 
 import chromadb
 
-from common import artifact_key, collection_name, load_config, load_jsonl, make_embedder
+from common import (artifact_key, artifact_names, collection_name, header_on, load_config, load_jsonl,
+                    make_embedder, search_text)
 
 
 def metadata(c: dict) -> dict:
@@ -35,8 +36,10 @@ def build(cfg: dict):
     name = collection_name(cfg)
     print(f"청크 {len(chunks)}개 → 컬렉션 {name} ({cfg['chroma_dir']})")
 
+    names = artifact_names(cfg) if header_on(cfg) else None
+    print(f"검색용 머리말: {'켬' if names else '끔'}")
     t0 = time.time()
-    vectors = make_embedder(cfg).embed([c["text"] for c in chunks])
+    vectors = make_embedder(cfg).embed([search_text(c, names) for c in chunks])
     print(f"임베딩 완료: {time.time() - t0:.1f}초, 차원 {len(vectors[0])}")
 
     client = chromadb.PersistentClient(path=str(cfg["chroma_dir"]))

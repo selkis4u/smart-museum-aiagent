@@ -26,8 +26,9 @@ import json
 import sys
 import time
 from datetime import datetime
+from pathlib import Path
 
-from common import HERE, load_config
+from common import HERE, header_on, load_config
 from retriever import Retriever
 
 # 캐시 결과를 바꾸는 설정만 해시에 넣는다(경로·스레드 수 등은 제외)
@@ -41,6 +42,10 @@ def fingerprint(cfg: dict) -> str:
         "chunks": hashlib.sha256(cfg["chunks"].read_bytes()).hexdigest(),
         "cfg": {k: cfg.get(k) for k in _HASH_KEYS},
         "reranker": {k: cfg["reranker"].get(k) for k in _RERANK_HASH_KEYS},
+        # 머리말: 켬/끔과 유물명 출처(targets.json) 내용. 경로는 PC마다 달라 넣지 않는다
+        "chunk_header": {"enabled": header_on(cfg),
+                         "targets": hashlib.sha256(Path(cfg["chunk_header"]["targets"]).read_bytes()).hexdigest()
+                         if header_on(cfg) else None},
         "cache": {k: ec[k] for k in ("artifacts", "topics", "per_topic")},
     }
     return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:16]

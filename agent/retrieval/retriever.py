@@ -17,7 +17,8 @@ from functools import lru_cache
 import chromadb
 from rank_bm25 import BM25Okapi
 
-from common import artifact_key, collection_name, load_config, load_jsonl, make_embedder, query_tokens, tokenize
+from common import (artifact_key, artifact_names, collection_name, header_on, load_config, load_jsonl,
+                    make_embedder, query_tokens, search_text, tokenize)
 
 
 class Retriever:
@@ -26,8 +27,11 @@ class Retriever:
         self.chunks = load_jsonl(self.cfg["chunks"])
         self.by_id = {c["chunk_id"]: c for c in self.chunks}
         self.ids = [c["chunk_id"] for c in self.chunks]
+        # 검색(BM25·Re-ranking)에는 머리말을 붙인 텍스트, 결과로 돌려주는 text는 청크 원문
+        names = artifact_names(self.cfg) if header_on(self.cfg) else None
+        self.search_text = {c["chunk_id"]: search_text(c, names) for c in self.chunks}
 
-        self.bm25 = BM25Okapi([tokenize(c["text"], self.cfg["bm25"]) for c in self.chunks])
+        self.bm25 = BM25Okapi([tokenize(self.search_text[c["chunk_id"]], self.cfg["bm25"]) for c in self.chunks])
 
         client = chromadb.PersistentClient(path=str(self.cfg["chroma_dir"]))
         name = collection_name(self.cfg)
@@ -130,7 +134,7 @@ class Retriever:
         t0 = time.perf_counter()
         if self.reranker is not None:
             pool = self._cap_background(fused, self.cfg["reranker"]["candidates"])
-            s = self.reranker.predict([(query, self.by_id[c]["text"]) for c in pool])
+            s = self.reranker.predict([(query, self.search_text[c]) for c in pool])
             rerank_scores = dict(zip(pool, map(float, s)))
             fused = sorted(pool, key=lambda c: -rerank_scores[c])
         t["rerank"] = time.perf_counter() - t0

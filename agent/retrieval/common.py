@@ -23,6 +23,8 @@ def load_config(path: Path | None = None) -> dict:
     cfg = yaml.safe_load((path or HERE / "config.yaml").read_text(encoding="utf-8"))
     for key in ("chunks", "eval_queries", "chroma_dir"):
         cfg[key] = (HERE / cfg[key]).resolve()
+    if cfg.get("chunk_header", {}).get("targets"):
+        cfg["chunk_header"]["targets"] = (HERE / cfg["chunk_header"]["targets"]).resolve()
     if "evidence_cache" in cfg:
         cfg["evidence_cache"]["path"] = (HERE / cfg["evidence_cache"]["path"]).resolve()
     return cfg
@@ -36,7 +38,37 @@ def collection_name(cfg: dict) -> str:
     """임베딩 모델마다 컬렉션을 따로 둔다(모델을 바꿔도 이전 인덱스와 섞이지 않게)."""
     emb = cfg["embedding"]
     slug = re.sub(r"[^a-zA-Z0-9]+", "_", f"{emb['backend']}_{emb['model']}").strip("_").lower()
+    if header_on(cfg):
+        slug += "_name"  # 머리말을 붙여 만든 벡터는 컬렉션을 따로 둔다(켜고 끄며 비교해도 섞이지 않게)
     return f"chunks_{slug}"[:63]
+
+
+# ---------------------------------------------------------------- 검색용 머리말
+
+def header_on(cfg: dict) -> bool:
+    return bool(cfg.get("chunk_header", {}).get("enabled"))
+
+
+def artifact_names(cfg: dict) -> dict[str, str]:
+    """유물 ID → 유물명(targets.json memo의 첫 쉼표 앞). 같은 ID가 여럿이면(복장물 등) 첫 항목이 유물 자체."""
+    names: dict[str, str] = {}
+    for t in json.loads(Path(cfg["chunk_header"]["targets"]).read_text(encoding="utf-8")):
+        names.setdefault(t["artifact_id"], t["memo"].split(",")[0].strip())
+    return names
+
+
+def search_text(chunk: dict, names: dict[str, str] | None) -> str:
+    """검색에 쓰는 텍스트 = [유물명] 머리말 + 청크 원문.
+
+    '함께 발견된 유물로는 …'·'다만 차이가 있다면 …'처럼 유물명이 앞 청크에만 있는 청크도
+    어느 유물의 이야기인지 검색에서 드러나게 한다. names=None이면 원문 그대로.
+    출처 제목·섹션은 넣지 않는다: 큐레이터 자료처럼 제목이 긴 자료는 모든 청크가 같은 제목을 달아
+    임베딩이 서로 비슷해지고, 제목의 단어(예: '만든 불상')가 질의와 겹쳐 정답 청크가 밀렸다(11/5 측정).
+    """
+    if names is None:
+        return chunk["text"]
+    art = " · ".join(names.get(a, a) for a in chunk["artifact_ids"])
+    return f"[{art}]\n{chunk['text']}" if art else chunk["text"]
 
 
 def artifact_key(artifact_id: str) -> str:
