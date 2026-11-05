@@ -124,7 +124,7 @@ erDiagram
 
 ## 5. Web 확인 요청
 
-1. RDB 종류(SQLite / MySQL)와 ORM(Flask-SQLAlchemy 등) 결정. 위 DDL은 SQLite에서 그대로 돌고, MySQL 변환 방법은 `schema_draft.sql` 머리말에 있습니다.
+1. RDB 종류와 ORM(Flask-SQLAlchemy 등) 결정.
 2. 시각 저장 방식(4장): 오프셋을 떼어 저장하는 방식에 동의하는지.
 3. `start_level` 열 추가(API 변경 없음)에 동의하는지.
 4. 명세 7장 안건 10 `generation_failed` 필드 추가.
