@@ -1,4 +1,4 @@
--- 스마트박물관 AI Agent RDB 스키마 초안 (Agent 제안, Web 확정)
+-- 스마트 박물관 Physical AI 유물 보호·도슨트 서비스 RDB 스키마 초안 (Agent 제안, Web 확정)
 -- DB: Oracle Database (Oracle Database Free 23ai에서 실행 확인, 12c 이상 문법만 사용)
 -- 근거: 인터페이스 명세 4.4 기록 저장 API, 8장 유물 기본 정보, 요구사항 FR-WEB-01·02·08·09·10·11·14
 --
