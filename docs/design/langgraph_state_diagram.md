@@ -1,6 +1,6 @@
-# LangGraph 도슨트 세션 상태도 v0.2
+# LangGraph 도슨트 세션 상태도 v0.3
 
-작성일 2026-11-05. 담당 송용석(Agent). FR-AG-09~18과 `docs/requirements/decisions.md`의 도슨트 규칙을 상태 기계로 옮긴 2주차 UML 설계 산출물입니다. 용어는 `CONTEXT.md`, 형식은 `docs/interface/interface_spec_v0.1.md`를 따릅니다. 3주차 LangGraph 상태 제어 Loop(11/16~18)는 이 문서를 설계도로 구현합니다.
+작성일 2026-11-05, 수정 2026-11-06(6.2 지식 검색 도구 선택, 6.3 MCP 연결 추가, ADR-0005). 담당 송용석(Agent). FR-AG-09~18과 `docs/requirements/decisions.md`의 도슨트 규칙을 상태 기계로 옮긴 2주차 UML 설계 산출물입니다. 용어는 `CONTEXT.md`, 형식은 `docs/interface/interface_spec_v0.1.md`를 따릅니다. 3주차 LangGraph 상태 제어 Loop(11/16~18)는 이 문서를 설계도로 구현합니다.
 
 ## 1. 기본 전제
 
@@ -210,10 +210,12 @@ flowchart LR
 ```mermaid
 flowchart LR
     A[관람 판정 수신<br/>5초 타이머 시작] --> B[근거 캐시 읽기<br/>evidence artifact_id]
-    B --> C{최신 소식<br/>하루 캐시?}
-    C -- 있음 --> D
-    C -- 없음 --> W[웹 검색<br/>허용 도메인·제한 2초<br/>초과·실패 시 소식 없이]
-    W --> D[LLM 스트리밍 생성<br/>근거+소식 상위 3건<br/>도록과 다른 내용 금지<br/>4단 구성 400자]
+    B --> T{LLM 도구 선택<br/>Tool Calling 1회}
+    T -- search_news --> W[최신 소식 검색 도구<br/>하루 캐시·허용 도메인<br/>제한 2초, 초과·실패 시 소식 없이]
+    T -- search_catalog --> S[도록 보강 검색 도구<br/>하이브리드 약 0.2초]
+    T -- 도구 없음 --> D
+    W --> D
+    S --> D[LLM 스트리밍 생성<br/>근거+소식 상위 3건<br/>도록과 다른 내용 금지<br/>4단 구성 400자]
     D --> E[문장 분할<br/>sentence_no 부여]
     E --> L[구역 잠금 획득]
     L --> F{세션 상태}
@@ -224,10 +226,35 @@ flowchart LR
 ```
 
 - 근거 캐시는 Agent 시작 때 미리 계산해 둔 Re-ranking 결과라 관람 판정 시점 검색은 캐시 읽기다(`agent/retrieval/README.md`).
+- **지식 검색은 LLM이 고른다(ADR-0005).** 근거 캐시의 기본 근거를 넣은 프롬프트와 함께 LLM에 MCP 도구 `search_catalog`·`search_news`만 연결하고, LLM이 보강 검색·최신 소식 검색을 할지와 질의를 정한다. 도구 라운드는 1회(동시 호출 가능)로 제한하고 바로 스트리밍 생성으로 넘어간다. 하루 캐시·허용 도메인·2초 제한은 `search_news` 도구 안에서 지킨다. `tool_choice: fixed`면 도구 선택 없이 코드가 유물 이름 질의로 `search_news`를 부른다(5초를 못 지킬 때의 대안).
 - **5초 타이머는 관람 판정을 받은 순간** 시작한다. 웹 검색·LLM 요청 시점부터 재면 검색 시간만큼 실제 지연이 NFR-03(관람 판정 → 첫 문장 5초)을 넘어도 대체 해설로 바뀌지 않는다.
 - 웹 검색은 2초 안에 끝나지 않거나 실패하면 최신 소식 없이 생성한다(4단 구성의 ③ 생략, 출처 URL 없음). 웹 검색 실패는 `GENERATION_FAILED`가 아니다.
 - **도록 대조는 별도 단계가 아니다.** 근거 청크와 검색 결과 상위 3건을 생성 프롬프트에 함께 넣고 "도록과 다른 내용은 쓰지 말고 맞는 소식 1개만 쓸 것"으로 지시한다. LLM은 스크립트 생성에만 쓴다는 원칙과 맞추고 단계를 줄이기 위해서다. 실제로 쓴 소식의 URL만 세션 기록에 남기도록 생성 결과에 출처 표시를 받는다.
 - 문장 전송은 구역 잠금 안에서 상태를 확인하고 보낸다. 그래프가 일시정지를 처리하는 동안에는 잠금을 얻지 못해 기다리고, 잠금을 얻은 뒤에는 일시정지 상태를 보고 보관만 한다.
+
+### 6.3 MCP 연결 (ADR-0005)
+
+```mermaid
+flowchart LR
+    subgraph AG[Agent 프로세스]
+        G[LangGraph 그래프<br/>규칙 노드] --> C
+        L[스크립트 생성 작업<br/>LLM Tool Calling] --> C
+        C[MCP 클라이언트<br/>langchain-mcp-adapters]
+    end
+    C <-- "MCP (stdio, JSON-RPC)" --> M[MCP 서버<br/>FastMCP, 도구 6종]
+    M -- 지식 검색 --> R[(로컬 검색기<br/>ChromaDB·BM25)]
+    M -- 지식 검색 --> WS[[웹 검색 API]]
+    M -- "REST (인터페이스 명세 4장)" --> F[Flask 도구용 API]
+```
+
+| 호출 주체 | 도구 | 선택 방식 |
+|---|---|---|
+| 스크립트 생성 작업의 LLM | `search_catalog`, `search_news` | LLM이 Tool Calling으로 선택·질의 작성 |
+| 규칙 노드·세션 노드 | 조명·음성 송출·기록 저장·상태 통지·Vision 상황 조회 | 5장 상태 전이표대로 코드가 정해진 인자로 호출, LLM 없음 |
+| 폴링 작업 | `get_zone_status` | 0.5초마다 코드가 호출 |
+
+- Agent가 시작할 때 MCP 서버를 stdio 자식 프로세스로 띄우고 도구 목록을 한 번 불러온다. 서버가 끊기면 다시 띄운다.
+- 5장 표의 "동작 (MCP 도구)"는 모두 이 MCP 클라이언트를 거쳐 호출한다. 규칙 노드도 같은 경로를 쓰므로 도구 정의는 MCP 서버 한 곳에만 있다.
 
 ## 7. 세션 상태 필드 (LangGraph State)
 

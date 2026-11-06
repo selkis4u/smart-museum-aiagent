@@ -1,6 +1,6 @@
 # 인터페이스 명세 초안 v0.1
 
-작성일 2026-11-03, 수정 2026-11-05(2장 이벤트 DTO 확정안). 모듈 간 연결 형식 초안입니다. 6장 체크리스트 9개는 11/3에 결정했고(**[11/3 결정]** 표시), 나머지는 결정사항·명세서 v0.3을 그대로 옮긴 것이며 세부 형식은 추후 결정합니다. 7장 안건을 11/11에 확정하면 v1.0으로 올리고 각 모듈은 이 문서만 보고 가짜 데이터로 개발합니다(NFR-14).
+작성일 2026-11-03, 수정 2026-11-05(2장 이벤트 DTO 확정안), 2026-11-06(0장·4장 MCP 서버 구간과 도구 이름, ADR-0005). 모듈 간 연결 형식 초안입니다. 6장 체크리스트 9개는 11/3에 결정했고(**[11/3 결정]** 표시), 나머지는 결정사항·명세서 v0.3을 그대로 옮긴 것이며 세부 형식은 추후 결정합니다. 7장 안건을 11/11에 확정하면 v1.0으로 올리고 각 모듈은 이 문서만 보고 가짜 데이터로 개발합니다(NFR-14).
 
 ## 0. 연결 구성
 
@@ -8,7 +8,8 @@
 |---|---|---|---|---|
 | CV → Agent | Socket.IO 클라이언트 **[11/5 결정]** | `http://127.0.0.1:8765`, 네임스페이스 `/events`, 이벤트 `cv_event` | Agent (python-socketio 비동기 서버) | 이벤트 DTO (변화가 있을 때만) |
 | CV → Flask | Socket.IO 클라이언트 **[11/3 결정]** | `http://127.0.0.1:5000`, 네임스페이스 `/cv`, 이벤트 `coords` | Flask | 좌표 메시지 (초당 5회) |
-| Agent → Flask | HTTP REST (JSON) | `http://127.0.0.1:5000/api/...` | Flask | MCP 도구가 부르는 도구용 API |
+| Agent → MCP 서버 **[11/6 결정]** | MCP (stdio, JSON-RPC) | Agent가 자식 프로세스로 실행 | MCP 서버 (Agent 담당, FastMCP) | MCP 도구 호출 (4장 도구 이름) |
+| MCP 서버 → Flask | HTTP REST (JSON) | `http://127.0.0.1:5000/api/...` | Flask | MCP 도구가 부르는 도구용 API |
 | Flask → 브라우저 | Socket.IO | 네임스페이스 `/admin` | Flask | 맵·구역 상태·알림 갱신 |
 
 - CV → Flask를 Socket.IO로 추천하는 이유: Flask가 브라우저용으로 Flask-SocketIO를 이미 쓰므로 받은 좌표를 같은 서버에서 바로 브라우저로 넘길 수 있고, 연결을 유지해 초당 5회 전송에 요청마다 드는 비용이 없다. 서버와 클라이언트의 Socket.IO 버전은 맞춰야 한다. **[11/5 결정]** CV → Agent도 Socket.IO로 통일해 CV는 python-socketio 클라이언트 하나로 Agent·Flask 두 곳에 연결한다(이전 초안은 CV → Agent 순수 WebSocket이라 CV가 라이브러리 두 개를 써야 했음). 대안 HTTP POST 초당 5회는 가장 단순하고 curl·Postman으로 바로 시험할 수 있으며 부하도 문제없다. 연결 끊김 판정은 두 방식 모두 "3초 미수신"(FR-WEB-16)으로 같다. 지연 목표(NFR-04 0.5초)는 둘 다 충분히 맞출 수 있어 담당자가 편한 쪽으로 정해도 된다.
@@ -125,16 +126,18 @@
 - `item_type`은 화면에 컵 소지자를 표시하는 데 쓴다 **[11/3 결정] 포함**.
 - Flask는 마지막 메시지를 메모리에 두고 3초 넘게 안 오면 "CV 연결 끊김"(FR-WEB-16). NFR-04는 `timestamp`와 브라우저 표시 시각의 차이로 잰다.
 
-## 4. 도구용 API (Agent MCP 도구 → Flask)
+## 4. 도구용 API (MCP 서버 → Flask)
 
-| MCP 도구 | 메서드·경로 | 관련 요구사항 |
-|---|---|---|
-| Vision 상황 조회 | `GET /api/zones/status` | FR-WEB-12, FR-AG-11·17 |
-| 조명 제어 | `POST /api/light` | FR-WEB-06 |
-| 음성 송출 | `POST /api/audio/narration` · `/notice` · `/priority` · `/stop` | FR-WEB-07 |
-| 기록 저장 | `POST /api/records/intrusions`, `PATCH /api/records/intrusions/{record_id}`, `POST /api/records/sessions`, `POST /api/records/violations` | FR-WEB-08·09·14, FR-AG-18 |
-| 상태 통지 | `POST /api/agent/state`, `POST /api/agent/heartbeat` | FR-WEB-04·16 |
-| 지식 검색 | (Agent 내부, Flask API 아님) | FR-AG-02~06 |
+Agent(MCP 클라이언트)는 MCP 서버의 도구를 이름으로 부르고, MCP 서버의 도구가 아래 Flask API를 호출한다(ADR-0005). 호출 주체는 지식 검색 도구만 LLM(Tool Calling)이고 나머지는 규칙 노드·폴링 작업이다. **[11/6 결정]** 도구 이름은 초안이며 입력 스키마는 Flask API 요청 형식을 그대로 따른다.
+
+| MCP 도구 | 도구 이름(초안) | 메서드·경로 | 호출 주체 | 관련 요구사항 |
+|---|---|---|---|---|
+| Vision 상황 조회 | `get_zone_status` | `GET /api/zones/status` | 규칙 노드·폴링 | FR-WEB-12, FR-AG-11·17 |
+| 조명 제어 | `set_light` | `POST /api/light` | 규칙 노드 | FR-WEB-06 |
+| 음성 송출 | `play_narration`·`play_notice`·`play_priority`·`stop_audio`·`prepare_audio` | `POST /api/audio/narration` · `/notice` · `/priority` · `/stop` · `/prepare` | 규칙 노드·생성 작업 | FR-WEB-07 |
+| 기록 저장 | `open_intrusion`·`update_intrusion`·`save_session`·`save_violation` | `POST /api/records/intrusions`, `PATCH /api/records/intrusions/{record_id}`, `POST /api/records/sessions`, `POST /api/records/violations` | 규칙 노드 | FR-WEB-08·09·14, FR-AG-18 |
+| 상태 통지 | `notify_state`·`send_heartbeat` | `POST /api/agent/state`, `POST /api/agent/heartbeat` | 규칙 노드·주기 작업 | FR-WEB-04·16 |
+| 지식 검색 | `search_catalog`·`search_news` | (Flask API 아님: 로컬 검색기·웹 검색 API) | LLM (Tool Calling) | FR-AG-02~06 |
 
 ### 4.1 상황 조회 `GET /api/zones/status`
 
